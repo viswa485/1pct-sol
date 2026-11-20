@@ -22,48 +22,46 @@ The project is intended to use humour and community participation to explore thr
 
 ## What's in this repository
 
-- `index.html` — a responsive, retro CRT/terminal-inspired single-page landing site.
-- A built-in canvas meme generator with preset captions and custom top/bottom text.
-- Sections about everyday economic pressure, AI and cybersecurity.
-- A community-focused introduction to The 1% Club.
-- A project-status panel that clearly labels the token as pre-launch until verified.
+- `index.html` — a single-file, responsive Windows 95-inspired desktop experience.
+- Clickable desktop shortcuts for `ECON.EXE`, `AI.EXE`, `CYBER.EXE`, Meme Lab, The 1% Club and project information.
+- Window controls for opening, focusing, minimizing, maximizing and closing apps; draggable windows on larger screens.
+- A Windows-style Start menu, taskbar, open-window buttons and clock.
+- A local monthly money calculator, a local-only educational scam-warning pattern check, a copyable AI prompt and a canvas meme generator.
 
-The landing page is plain HTML, CSS and JavaScript. It does not require a package manager, build step or server-side application.
+The site uses plain HTML, CSS and JavaScript. It has no package manager, build command, external JavaScript dependency or server-side requirement. X and Telegram links are intentionally not included.
 
 ## Run locally
 
-You can open `index.html` directly in a browser, or start a simple local web server from the repository directory:
+Open `index.html` directly in a browser, or run:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then visit:
+Then visit `http://localhost:8000`.
 
-```
-http://localhost:8000
-```
+## Interactive apps
 
-## Website configuration
-
-The current site intentionally has no X, Telegram, Pump.fun or chart links. It also does not display a copyable contract address because no verified mint address has been added.
-
-After a token is legally cleared and actually created, update the visible project-status section in `index.html` only with independently verified details. Add external links only after the official accounts and destinations exist and have been checked.
-
-Do not publish a fabricated contract address, fake social account, unsupported supply claim, guaranteed return, guaranteed graduation claim or unverified liquidity statement.
+- **ECON.EXE:** Enter monthly income and expenses to calculate an estimated remainder. Values are processed in the browser and are not sent to a server.
+- **AI.EXE:** Read practical ways to approach changing AI tools and copy a career-workflow prompt.
+- **CYBER.EXE:** Check pasted text for a small set of common scam-warning patterns. The check runs locally and is educational only; it is not a security verdict.
+- **Meme Lab:** Edit preset or custom captions and download a PNG generated in the browser.
+- **The 1% Club:** Complete a personal Battery Check and copy it for sharing.
 
 ## Publish with GitHub Pages
 
 1. Open the repository's **Settings → Pages**.
 2. Under **Build and deployment**, choose **Deploy from a branch**.
 3. Select branch **main** and folder **/(root)**.
-4. Save the settings and wait for GitHub Pages to finish deploying.
+4. Save the settings and confirm the deployment has succeeded.
 
-Expected project URL:
+Expected site URL:
 
 https://viswa485.github.io/1pct-sol/
 
-The URL becomes active only after GitHub Pages is enabled and its deployment succeeds. Check the Pages settings or Actions deployment status if it does not load.
+The site URL is live when GitHub Pages is enabled and the deployment completes.
+
+## Editing and contributing
 
 ## Editing and contributing
 
@@ -88,7 +86,7 @@ These are ideas for future exploration, not currently delivered products or toke
 
 ## Risk and transparency
 
-$1PCT is intended as a speculative memecoin. Crypto-assets can be extremely volatile and buyers can lose all of the money they spend. A website, community, meme, roadmap or Pump.fun listing does not guarantee value, liquidity, adoption, graduation or future development.
+$1PCT is intended as a speculative memecoin. Crypto-assets can be extremely volatile and buyers can lose all of the money they spend. A website, community, meme, roadmap or Pump.fun listing does not guarantee token value, liquidity, adoption, graduation or continued operation.
 
 - No guaranteed profit or price target.
 - No guaranteed liquidity or exchange listing.
