@@ -4,7 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#008080">
-  <meta name="description" content="1% BATTERY — The 1% Club. A retro internet corner for people navigating money, AI, work and online life.">
+  <meta name="description" content="1% BATTERY ($1PCT) — The 1% Club. A Solana meme-token community about everyday money, AI, work and digital life. The future is updating. Your bills aren't.">
+  <link rel="canonical" href="https://viswa485.github.io/1pct-sol/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://viswa485.github.io/1pct-sol/">
+  <meta property="og:title" content="1% BATTERY ($1PCT) — The 1% Club">
+  <meta property="og:description" content="The future is updating. Your bills aren't. A Solana meme-token community for life on low battery.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="1% BATTERY ($1PCT) — The 1% Club">
+  <meta name="twitter:description" content="The future is updating. Your bills aren't. Life on low battery.">
   <meta property="og:title" content="1% BATTERY — The 1% Club">
   <meta property="og:description" content="Not the billionaire 1%. The 1% battery. Open a window, make a meme, take a breath.">
   <title>1% BATTERY — The 1% Club</title>
@@ -55,7 +63,7 @@
     }
     .live-led { width: 8px; height: 8px; background: #76ff76; border-radius: 50%; box-shadow: 0 0 7px #76ff76; }
     .desktop-icons {
-      position: absolute; top: 94px; left: 18px; z-index: 1;
+      position: absolute; top: 155px; left: 18px; z-index: 1;
       display: flex; flex-direction: column; gap: 11px; width: 92px;
     }
     .desktop-icon {
@@ -200,6 +208,27 @@
     .clock { font-size: 12px; }
     .desktop-footer-note { text-align: center; padding: 8px 10px; background: #c0c0c0; color: #555; font-size: 11px; }
 
+    .launch-dock {
+      position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px; margin: 0 5px 12px; padding: 10px 12px;
+      color: #fff; background: rgba(0,0,0,.22); border: 1px solid rgba(255,255,255,.38);
+      box-shadow: 1px 1px 0 rgba(0,0,0,.22); font-family: "Courier New", monospace;
+    }
+    .launch-dock-copy { min-width: 0; display: grid; gap: 4px; }
+    .launch-dock-copy strong { font-size: 12px; letter-spacing: .04em; }
+    .launch-dock-copy span { font: 11px Tahoma, Arial, sans-serif; line-height: 1.45; opacity: .95; }
+    .launch-dock-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+    .launch-link, .launch-action {
+      display: inline-flex; min-height: 30px; align-items: center; justify-content: center; gap: 6px;
+      padding: 6px 11px; color: #111; background: var(--win-gray); text-decoration: none;
+      border: 2px solid; border-color: var(--win-light) var(--win-darker) var(--win-darker) var(--win-light);
+      box-shadow: 1px 1px 0 #000; font: bold 12px Tahoma, Arial, sans-serif;
+    }
+    .launch-link:hover, .launch-action:hover { background: #e8e8e8; }
+    .launch-link:active, .launch-action:active { border-color: var(--win-darker) var(--win-light) var(--win-light) var(--win-darker); box-shadow: none; transform: translate(1px,1px); }
+    .launch-dock-note { width: 100%; margin-top: -5px; font: 10px Tahoma, Arial, sans-serif; opacity: .85; line-height: 1.4; }
+    .token-address-note { overflow-wrap: anywhere; padding: 9px; margin: 10px 0; background: #fff8dc; border: 1px solid #b69c53; font-size: 12px; line-height: 1.5; }
+    .external-link { color: #000080; text-decoration: underline; font-weight: bold; }
     @media (max-width: 760px) {
       .desktop { min-height: calc(100vh - 42px); padding: 14px 10px 76px; overflow: visible; }
       .desktop-topline { padding: 0 5px 13px; }
@@ -239,8 +268,20 @@
         <div class="desktop-brand">1% BATTERY <span style="color:#d9ff9c">/ THE 1% CLUB</span></div>
         <div class="desktop-tagline">The future is updating. Your bills aren't.</div>
       </div>
-      <div class="desktop-status"><span class="live-led"></span> SYSTEM ONLINE · CLUB OPEN</div>
+      <div class="desktop-status"><span class="live-led"></span> TOKEN LIVE · CLUB OPEN</div>
     </div>
+
+    <section class="launch-dock" aria-label="1% BATTERY launch information">
+      <div class="launch-dock-copy">
+        <strong>1% BATTERY ($1PCT) // LIVE ON SOLANA</strong>
+        <span>The future is updating. Your bills aren't. Welcome to The 1% Club — internet culture for life on low battery.</span>
+      </div>
+      <div class="launch-dock-actions">
+        <a class="launch-link" href="https://pump.fun/" target="_blank" rel="noopener noreferrer">Open Pump.fun ↗</a>
+        <button class="launch-action" type="button" data-open="token">Token information</button>
+      </div>
+      <div class="launch-dock-note">Before trading, verify the full mint address from the official coin page. Token names and tickers can be copied.</div>
+    </section>
 
     <div class="desktop-icons" aria-label="Desktop applications">
       <button class="desktop-icon" data-open="welcome"><span class="glyph">💾</span><span class="icon-label">1% Club</span></button>
@@ -251,7 +292,7 @@
       <button class="desktop-icon" data-open="token"><span class="glyph">🔋</span><span class="icon-label">1PCT Info</span></button>
     </div>
 
-    <section class="window open" id="window-welcome" data-window="welcome" style="left:150px;top:76px;width:650px" role="dialog" aria-labelledby="title-welcome">
+    <section class="window open" id="window-welcome" data-window="welcome" style="left:150px;top:150px;width:650px" role="dialog" aria-labelledby="title-welcome">
       <div class="titlebar">
         <div class="title-left"><span class="title-icon">💾</span><span id="title-welcome">WELCOME.TXT — THE 1% CLUB</span></div>
         <div class="title-controls">
@@ -445,15 +486,21 @@
         <div class="title-controls"><button class="win-control" data-action="minimize" aria-label="Minimize">_</button><button class="win-control" data-action="maximize" aria-label="Maximize">□</button><button class="win-control" data-action="close" aria-label="Close">×</button></div>
       </div>
       <div class="window-body">
-        <div class="app-heading">1% BATTERY // THE INTERNET CULTURE CLUB</div>
+        <div class="app-heading">1% BATTERY // LIVE SOLANA MEME TOKEN</div>
         <h2>Not the billionaire 1%. The 1% battery.</h2>
         <div class="stat-grid">
           <div class="stat-tile"><b>PROJECT</b><span>1% BATTERY</span></div>
-          <div class="stat-tile"><b>SYMBOL</b><span>$1PCT</span></div>
-          <div class="stat-tile"><b>ECOSYSTEM</b><span>Solana</span></div>
+          <div class="stat-tile"><b>TICKER</b><span>$1PCT</span></div>
+          <div class="stat-tile"><b>NETWORK</b><span>Solana</span></div>
         </div>
-        <p>The 1% Club is a community about the everyday realities of work, money, AI and online life. The token is speculative and can lose all of its value.</p>
-        <p class="tiny muted">Always verify the official mint address and market independently before interacting with a token. This page does not ask for a wallet connection, private key or seed phrase.</p>
+        <p><strong>Launched on Pump.fun.</strong> 1% BATTERY is a community meme-token project about everyday money pressure, AI and the future of work, and digital life. The 1% Club is open to everyone; owning a token is not required to take part.</p>
+        <div class="win-panel">
+          <h3>OFFICIAL TOKEN LINKS</h3>
+          <p>Use the project's canonical Pump.fun coin page to confirm the token before trading.</p>
+          <a class="external-link" href="https://pump.fun/" target="_blank" rel="noopener noreferrer">Open Pump.fun ↗</a>
+          <div class="token-address-note"><strong>Mint-address check:</strong> this website does not yet publish a mint address. Do not rely on the name or ticker alone. Match the complete mint address shown on the project's official coin page before buying or swapping.</div>
+        </div>
+        <p class="tiny muted">The token is speculative and may lose all of its value. This website does not promise returns, liquidity, listings or token-holder benefits. It never asks for a wallet connection, private key or recovery phrase.</p>
       </div>
     </section>
 
@@ -483,7 +530,7 @@
     <div class="task-items" id="task-items" aria-label="Open windows"></div>
     <div class="tray"><span>🔋 1%</span><span class="clock" id="clock">--:--</span></div>
   </footer>
-  <div class="desktop-footer-note">1% BATTERY · THE 1% CLUB · THE FUTURE IS UPDATING. YOUR BILLS AREN'T.</div>
+  <div class="desktop-footer-note">1% BATTERY ($1PCT) · SOLANA · THE 1% CLUB · SPECULATIVE TOKEN — VERIFY THE FULL MINT BEFORE TRADING. NO GUARANTEED RETURNS.</div>
 
   <script>
     (function () {
@@ -809,6 +856,7 @@
         link.href = canvas.toDataURL("image/png");
         link.click();
       });
+      renderMeme();
 
       // Start on the welcome desktop window.
       openWindow("welcome");
