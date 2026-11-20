@@ -1,1040 +1,818 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1% BATTERY ($1PCT) — The 1% Club</title>
-  <meta name="description" content="Not the billionaire 1%. The 1% battery. A little internet corner for people navigating work, money, AI and online life. Make a meme. Take a breath. Keep going." />
-  <meta property="og:title" content="1% BATTERY — The 1% Club" />
-  <meta property="og:description" content="Not the billionaire 1%. The 1% battery. We're all figuring it out." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0B0E14" />
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#008080">
+  <meta name="description" content="1% BATTERY — The 1% Club. A retro internet corner for people navigating money, AI, work and online life.">
+  <meta property="og:title" content="1% BATTERY — The 1% Club">
+  <meta property="og:description" content="Not the billionaire 1%. The 1% battery. Open a window, make a meme, take a breath.">
+  <title>1% BATTERY — The 1% Club</title>
   <style>
     :root {
-      --bg: #0B0E14;
-      --bg-card: #121722;
-      --bg-card-hover: #181F2E;
-      --border: #232C3D;
-      --text: #F8FAFC;
-      --text-muted: #94A3B8;
-      --red: #FF3B30;
-      --red-glow: rgba(255, 59, 48, 0.35);
-      --green: #39FF14;
-      --green-dim: rgba(57, 255, 20, 0.12);
-      --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-      --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --desktop: #008080;
+      --win-gray: #c0c0c0;
+      --win-light: #ffffff;
+      --win-mid: #dfdfdf;
+      --win-dark: #808080;
+      --win-darker: #404040;
+      --title-blue: #000080;
+      --title-blue-2: #1084d0;
+      --ink: #111111;
+      --green: #008000;
+      --red: #c00000;
+      --cream: #fffbe8;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; font-family: Tahoma, "MS Sans Serif", Arial, sans-serif; color: var(--ink); }
+    body { background: var(--desktop); overflow-x: hidden; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 2px dotted #000; outline-offset: 2px;
     }
-
-    html {
-      scroll-behavior: smooth;
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-sans);
-      line-height: 1.5;
-    }
-
-    body {
-      background-image:
-        radial-gradient(circle at 15% 15%, rgba(255, 59, 48, 0.08), transparent 35%),
-        radial-gradient(circle at 85% 25%, rgba(57, 255, 20, 0.05), transparent 35%),
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Top Alert Ticker */
-    .status-bar {
-      background: #14090A;
-      border-bottom: 1px solid rgba(255, 59, 48, 0.35);
-      padding: 8px 16px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: #FCA5A5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      text-align: center;
-    }
-
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--red);
-      box-shadow: 0 0 10px var(--red);
-      animation: blink 1.1s infinite;
-      flex-shrink: 0;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
-    }
-
-    /* Navigation */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(11, 14, 20, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 68px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 18px;
-      letter-spacing: -0.02em;
-    }
-
-    .batt-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 3px 8px;
-      border: 1.5px solid var(--red);
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--red);
-      background: rgba(255, 59, 48, 0.1);
+    .desktop {
       position: relative;
-    }
-
-    .batt-pill::after {
-      content: "";
-      width: 3px;
-      height: 8px;
-      background: var(--red);
-      border-radius: 0 2px 2px 0;
-      position: absolute;
-      right: -5px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-cta {
-      background: var(--red);
-      color: #fff !important;
-      padding: 9px 16px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 13px;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .nav-cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 20px var(--red-glow);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 64px 0 56px;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--green);
-      background: var(--green-dim);
-      border: 1px solid rgba(57, 255, 20, 0.3);
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 5vw, 3.85rem);
-      font-weight: 900;
-      line-height: 1.06;
-      letter-spacing: -0.035em;
-      margin-bottom: 18px;
-    }
-
-    h1 span.accent-red {
-      color: var(--red);
-      text-shadow: 0 0 28px rgba(255, 59, 48, 0.35);
-    }
-
-    .hero-sub {
-      font-size: 18px;
-      color: var(--text-muted);
-      max-width: 560px;
-      margin-bottom: 28px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 13px 22px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all 0.15s ease;
-    }
-
-    .btn-primary {
-      background: var(--red);
-      color: #fff;
-      box-shadow: 0 6px 24px var(--red-glow);
-    }
-
-    .btn-primary:hover {
-      background: #ff2417;
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: var(--bg-card);
-      border-color: var(--border);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-card-hover);
-      border-color: #3B4861;
-    }
-
-    /* Contract Address Box */
-    .ca-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      max-width: 560px;
-    }
-
-    .ca-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    .ca-value {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--green);
-      word-break: break-all;
-    }
-
-    .copy-btn {
-      background: #1E2636;
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s;
-    }
-
-    .copy-btn:hover {
-      background: #2A354B;
-    }
-
-    /* Mascot Card */
-    .mascot-card {
-      background: linear-gradient(180deg, #151C29 0%, #0E131C 100%);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px;
-      position: relative;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
-    }
-
-    .mascot-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .mascot-frame {
-      background: #090C11;
-      border: 1px solid #1E2636;
-      border-radius: 14px;
-      padding: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .mascot-footer {
-      margin-top: 14px;
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* Sections */
-    section {
-      padding: 56px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-tag {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--red);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
-
-    h2 {
-      font-size: clamp(1.75rem, 3.5vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      margin-bottom: 12px;
-    }
-
-    .section-desc {
-      color: var(--text-muted);
-      max-width: 640px;
-      margin-bottom: 32px;
-    }
-
-    /* 3-Column Grid */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: #384661;
-    }
-
-    .card-code {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--green);
-      margin-bottom: 10px;
-      display: inline-block;
-    }
-
-    .card h3 {
-      font-size: 19px;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: var(--text-muted);
-      font-size: 14.5px;
-    }
-
-    /* Meme Studio */
-    .studio-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    .canvas-wrap {
-      background: #090C11;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      text-align: center;
-    }
-
-    canvas {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      border: 1px solid #232C3D;
-    }
-
-    .studio-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .input-group label {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .input-group input,
-    .input-group select {
-      width: 100%;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 12px 14px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-family: var(--font-sans);
-    }
-
-    .input-group input:focus,
-    .input-group select:focus {
-      outline: none;
-      border-color: var(--red);
-    }
-
-    /* Token Specs */
-    .specs-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .spec-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-    }
-
-    .spec-item span {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .spec-item strong {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0 56px;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .disclaimer {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 12px;
-      line-height: 1.6;
-      color: #7C8B9F;
-    }
-
-    @media (max-width: 860px) {
-      .hero,
-      .grid-3,
-      .studio-grid {
-        grid-template-columns: 1fr;
-      }
-      .specs-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .nav-links a:not(.nav-cta) {
-        display: none;
-      }
-    }
-
-    /* RETRO SYSTEM SKIN — CRT terminal / 90s shareware */
-    :root {
-      --bg: #10150D; --bg-card: #182116; --bg-card-hover: #202D1B;
-      --border: #536B3D; --text: #F0F2D8; --text-muted: #B5BE9D;
-      --red: #FF765E; --red-glow: rgba(255, 118, 94, 0.28);
-      --green: #B7F34A; --green-dim: rgba(183, 243, 74, 0.10);
-      --font-sans: "Courier New", Courier, monospace;
-      --font-mono: "Courier New", Courier, monospace;
-    }
-    html { background: #0A0E08; color: var(--text); font-family: var(--font-sans); }
-    body {
-      background-color: var(--bg);
+      min-height: calc(100vh - 42px);
+      padding: 22px 20px 70px 18px;
+      overflow: hidden;
+      background-color: var(--desktop);
       background-image:
-        linear-gradient(rgba(183,243,74,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(183,243,74,.055) 1px, transparent 1px),
-        radial-gradient(ellipse at 50% 10%, rgba(183,243,74,.10), transparent 55%);
-      background-size: 24px 24px, 24px 24px, 100% 100%;
-      font-family: var(--font-sans);
+        radial-gradient(ellipse at 72% 28%, rgba(255,255,255,.10), transparent 36%),
+        linear-gradient(135deg, rgba(0,0,0,.04) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.04) 50%, rgba(0,0,0,.04) 75%, transparent 75%);
+      background-size: auto, 12px 12px;
     }
-    body::before {
-      content: ""; position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .16;
-      background: repeating-linear-gradient(to bottom, rgba(0,0,0,.28) 0, rgba(0,0,0,.28) 1px, transparent 2px, transparent 4px);
+    .desktop-topline {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 18px;
+      color: #fff; text-shadow: 1px 1px #003d3d; padding: 0 8px 18px 5px;
     }
-    body::after {
-      content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
-      background: radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.38) 100%);
+    .desktop-brand { font-weight: 900; font-size: 15px; letter-spacing: .08em; }
+    .desktop-tagline { margin-top: 4px; font-size: 12px; opacity: .9; }
+    .desktop-status {
+      display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px;
+      color: #fff; font: bold 11px "Courier New", monospace;
+      background: rgba(0,0,0,.20); border: 1px solid rgba(255,255,255,.35);
     }
-    ::selection { background: var(--green); color: #10150D; }
-    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px dashed var(--green); outline-offset: 4px; }
-    .status-bar { background: #1C2818; color: var(--green); border-bottom: 2px solid var(--green); font-size: 11px; letter-spacing: .045em; text-transform: uppercase; }
-    .pulse-dot { background: var(--green); box-shadow: 0 0 0 3px rgba(183,243,74,.12), 0 0 12px var(--green); }
-    header { background: rgba(12,17,10,.96); border-bottom: 2px solid var(--border); backdrop-filter: none; }
-    .nav-inner { min-height: 72px; height: auto; padding-top: 10px; padding-bottom: 10px; }
-    .brand { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .04em; }
-    .batt-pill { border-radius: 0; border-width: 2px; font-weight: 900; box-shadow: 2px 2px 0 #6A2C22; }
-    .nav-links { gap: 16px; font-family: var(--font-mono); text-transform: uppercase; font-size: 11px; }
-    .nav-links a { padding: 7px 4px; }
-    .nav-links .nav-cta { background: var(--green); color: #10150D !important; border: 2px solid var(--green); border-radius: 0; box-shadow: 3px 3px 0 #536B3D; padding: 10px 12px; }
-    .hero { padding-top: 76px; padding-bottom: 68px; gap: 38px; }
-    .badge { border-radius: 0; border: 1px dashed var(--green); background: #192416; color: var(--green); font-weight: 900; }
-    h1, h2, h3 { font-family: var(--font-mono); text-transform: uppercase; }
-    h1 { line-height: 1.12; letter-spacing: -.065em; text-shadow: 3px 3px 0 rgba(183,243,74,.12); }
-    h1 span.accent-red { color: var(--red); text-shadow: 3px 3px 0 rgba(255,118,94,.16); }
-    .hero-sub { font-size: 16px; line-height: 1.8; max-width: 600px; }
-    .hero-actions { gap: 14px; }
-    .btn { border-radius: 0; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .03em; font-size: 12px; border-width: 2px; box-shadow: 4px 4px 0 rgba(0,0,0,.40); }
-    .btn-primary { background: var(--green); color: #10150D; border-color: var(--green); box-shadow: 4px 4px 0 #536B3D; }
-    .btn-primary:hover { background: #D1FF77; color: #10150D; }
-    .btn-secondary { background: #1A2417; color: var(--text); border-color: #718A56; }
-    .btn-secondary:hover { background: #26341F; border-color: var(--green); }
-    .ca-box { border: 2px solid var(--border); border-radius: 0; box-shadow: 5px 5px 0 rgba(0,0,0,.35); background: #11190F; }
-    .ca-value { color: var(--green); font-size: 11px; line-height: 1.6; }
-    .status-note { align-items: center; }
-    .status-stamp { flex-shrink: 0; padding: 7px 9px; color: var(--red); border: 2px solid var(--red); font: 900 11px var(--font-mono); transform: rotate(-3deg); white-space: nowrap; }
-    .mascot-card { border: 2px solid var(--border); border-radius: 0; box-shadow: 8px 8px 0 rgba(0,0,0,.42); }
-    .mascot-header, .mascot-footer { text-transform: uppercase; letter-spacing: .035em; }
-    .mascot-frame { border-radius: 0; border: 2px dashed #536B3D; background-color: #0A0E08; background-image: radial-gradient(rgba(183,243,74,.24) 1px, transparent 1px); background-size: 8px 8px; }
-    section { border-top: 2px dashed var(--border); padding: 66px 0; }
-    .section-tag { color: var(--green); font-weight: 900; }
-    h2 { letter-spacing: -.05em; line-height: 1.18; }
-    .section-desc { font-size: 14px; line-height: 1.85; }
-    .card { border-radius: 0; border: 2px solid var(--border); box-shadow: 4px 4px 0 #080B07; background: #172015; }
-    .card:hover { border-color: var(--green); transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #080B07; }
-    .card-code { color: var(--green); }
-    .card h3 { font-size: 16px; line-height: 1.35; }
-    .card p { line-height: 1.75; }
-    .community-note { margin-top: 24px; padding: 18px 20px; border: 2px dashed var(--green); background: rgba(183,243,74,.07); color: var(--text-muted); font-size: 13px; line-height: 1.8; }
-    .community-note strong { color: var(--green); }
-    .canvas-wrap { border-radius: 0; border: 2px solid var(--border); box-shadow: 6px 6px 0 #080B07; background: #0B1009; }
-    canvas { border-radius: 0; border: 2px solid #536B3D; image-rendering: pixelated; }
-    .studio-controls { gap: 18px; }
-    .input-group label { color: var(--green); font-weight: 900; letter-spacing: .05em; }
-    .input-group input, .input-group select { border-radius: 0; border: 2px solid var(--border); background: #0D130B; color: var(--text); font-family: var(--font-mono); }
-    .input-group input:focus, .input-group select:focus { border-color: var(--green); }
-    .spec-item { border-radius: 0; border: 2px solid var(--border); box-shadow: 3px 3px 0 #080B07; background: #172015; }
-    .spec-item strong { font-family: var(--font-mono); font-size: 16px; overflow-wrap: anywhere; }
-    .status-footnote { margin-top: 20px; color: var(--text-muted); font-size: 12px; line-height: 1.8; }
-    footer { padding-top: 48px; }
-    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; font: 11px var(--font-mono); text-transform: uppercase; }
-    .footer-links a:hover { color: var(--green); }
-    .disclaimer { border-radius: 0; border: 1px dashed var(--border); background: rgba(0,0,0,.18); line-height: 1.8; }
-    @media (max-width: 860px) {
-      .nav-inner { align-items: flex-start; gap: 12px; }
-      .nav-links { justify-content: flex-end; flex-wrap: wrap; gap: 8px 12px; }
-      .nav-links a:not(.nav-cta) { display: inline-block; }
-      .hero { padding-top: 44px; }
-      .status-note { align-items: flex-start; flex-direction: column; }
+    .live-led { width: 8px; height: 8px; background: #76ff76; border-radius: 50%; box-shadow: 0 0 7px #76ff76; }
+    .desktop-icons {
+      position: absolute; top: 94px; left: 18px; z-index: 1;
+      display: flex; flex-direction: column; gap: 11px; width: 92px;
     }
-    @media (max-width: 560px) {
-      .container { padding-left: 15px; padding-right: 15px; }
-      .nav-inner { flex-direction: column; align-items: stretch; }
-      .nav-links { justify-content: flex-start; }
-      .nav-links .nav-cta { margin-left: auto; }
-      .hero { padding-top: 34px; }
-      .hero-sub { font-size: 14px; }
-      .hero-actions .btn { width: 100%; }
-      .specs-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .spec-item { padding: 14px; }
-      .spec-item strong { font-size: 13px; }
-      .footer-top { align-items: flex-start; flex-direction: column; }
-      .footer-links { gap: 12px; }
-      .status-bar { font-size: 9px; }
+    .desktop-icon {
+      width: 86px; min-height: 78px; padding: 5px 3px; display: flex; flex-direction: column;
+      gap: 5px; align-items: center; justify-content: flex-start; color: #fff;
+      border: 1px solid transparent; background: transparent; text-align: center;
+      font: 12px Tahoma, Arial, sans-serif; text-shadow: 1px 1px #003333;
+    }
+    .desktop-icon:hover, .desktop-icon:focus-visible { background: rgba(0,0,128,.22); border: 1px dotted #fff; outline: none; }
+    .desktop-icon:active { background: rgba(0,0,128,.40); }
+    .desktop-icon .glyph {
+      width: 38px; height: 34px; display: grid; place-items: center; font-size: 27px;
+      filter: drop-shadow(1px 2px 0 rgba(0,0,0,.35));
+    }
+    .desktop-icon .icon-label { max-width: 86px; line-height: 1.2; overflow-wrap: anywhere; }
+    .desktop-hint {
+      position: absolute; left: 24px; bottom: 18px; max-width: 190px;
+      color: rgba(255,255,255,.86); font: 11px "Courier New", monospace;
+      text-shadow: 1px 1px #004848; line-height: 1.5;
+    }
+
+    .window {
+      position: absolute; z-index: 10; display: none; width: min(650px, calc(100% - 150px));
+      max-height: calc(100% - 112px); overflow: hidden; background: var(--win-gray);
+      border: 2px solid; border-color: var(--win-light) var(--win-darker) var(--win-darker) var(--win-light);
+      box-shadow: 2px 2px 0 rgba(0,0,0,.45); color: var(--ink);
+    }
+    .window.open { display: flex; flex-direction: column; }
+    .window.maximized { left: 10px !important; top: 10px !important; width: calc(100% - 20px) !important; height: calc(100% - 20px) !important; max-height: none; }
+    .titlebar {
+      height: 29px; flex: 0 0 29px; display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; padding: 3px 4px 3px 7px; color: #fff;
+      background: linear-gradient(90deg, var(--title-blue), var(--title-blue-2));
+      font: bold 13px Tahoma, Arial, sans-serif; cursor: grab; touch-action: none; user-select: none;
+    }
+    .titlebar:active { cursor: grabbing; }
+    .title-left { min-width: 0; display: flex; align-items: center; gap: 7px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .title-icon { width: 17px; height: 17px; display: grid; place-items: center; font-size: 14px; }
+    .title-controls { display: flex; gap: 3px; flex: 0 0 auto; }
+    .win-control {
+      width: 22px; height: 20px; padding: 0; display: grid; place-items: center;
+      background: var(--win-gray); color: #111; border: 2px solid;
+      border-color: var(--win-light) var(--win-darker) var(--win-darker) var(--win-light);
+      font: bold 13px Arial, sans-serif; line-height: 1;
+    }
+    .win-control:active { border-color: var(--win-darker) var(--win-light) var(--win-light) var(--win-darker); padding: 1px 0 0 1px; }
+    .window-body { overflow: auto; padding: 17px; min-height: 90px; }
+    .window-body h1 { font-size: 24px; margin: 0 0 8px; line-height: 1.15; }
+    .window-body h2 { font-size: 18px; margin: 0 0 9px; }
+    .window-body h3 { font-size: 15px; margin: 0 0 6px; }
+    .window-body p { margin: 7px 0 12px; font-size: 13px; line-height: 1.55; }
+    .window-body ul { margin: 8px 0 12px 20px; padding: 0; font-size: 13px; line-height: 1.7; }
+    .window-body strong { font-weight: 700; }
+    .win-inset {
+      border: 2px solid; border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+      background: #fff; padding: 12px;
+    }
+    .win-panel { background: #e6e6e6; border: 1px solid #888; padding: 12px; }
+    .win-row { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+    .win-btn {
+      min-height: 29px; padding: 5px 13px; color: #111; background: var(--win-gray);
+      border: 2px solid; border-color: var(--win-light) var(--win-darker) var(--win-darker) var(--win-light);
+      box-shadow: 1px 1px 0 #000; font: 13px Tahoma, Arial, sans-serif;
+    }
+    .win-btn:active { border-color: var(--win-darker) var(--win-light) var(--win-light) var(--win-darker); box-shadow: none; transform: translate(1px,1px); }
+    .win-btn.primary { font-weight: bold; outline: 1px dotted #111; outline-offset: -5px; }
+    .win-label { display: block; font-size: 12px; font-weight: bold; margin: 9px 0 4px; }
+    .win-input, .win-select, .win-textarea {
+      width: 100%; padding: 7px 8px; color: #111; background: #fff;
+      border: 2px solid; border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+      border-radius: 0; font: 13px Tahoma, Arial, sans-serif;
+    }
+    .win-textarea { min-height: 100px; resize: vertical; }
+    .muted { color: #555; }
+    .tiny { font-size: 11px !important; }
+    .pixel-rule { border: 0; border-top: 1px solid #888; border-bottom: 1px solid #fff; margin: 13px 0; }
+    .welcome-grid { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(160px,.75fr); gap: 13px; }
+    .welcome-hero { padding: 15px; background: #fff; border: 2px solid; border-color: #777 #fff #fff #777; }
+    .welcome-hero .eyebrow { font: bold 11px "Courier New", monospace; color: #006060; text-transform: uppercase; }
+    .welcome-hero h1 { margin-top: 9px; }
+    .welcome-hero h1 span { color: #b00000; }
+    .welcome-hero p { font-size: 14px; }
+    .battery-meter { border: 2px solid #333; height: 20px; padding: 2px; background: #eee; position: relative; margin: 9px 0; }
+    .battery-meter::after { content: ""; position: absolute; right: -5px; top: 5px; width: 4px; height: 8px; background: #333; }
+    .battery-fill { width: 1%; height: 100%; min-width: 5px; background: #c00000; }
+    .quick-launch { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 12px; }
+    .quick-launch .win-btn { text-align: left; }
+    .app-heading { padding: 10px; margin-bottom: 12px; background: #000080; color: #fff; font: bold 12px "Courier New", monospace; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; margin: 10px 0; }
+    .stat-tile { background: #fff; border: 2px inset #ddd; padding: 9px; min-width: 0; }
+    .stat-tile b { display: block; font: bold 11px "Courier New", monospace; color: #006060; margin-bottom: 5px; }
+    .stat-tile span { font-size: 12px; }
+    .result-box { padding: 10px; margin-top: 11px; background: #fff; border: 2px inset #ddd; font-size: 13px; min-height: 42px; }
+    .result-box.good { color: #075f19; }
+    .result-box.warn { color: #8b2600; }
+    .check-list { padding: 0 !important; margin: 8px 0 12px !important; list-style: none; }
+    .check-list li { padding: 6px 0; border-bottom: 1px dotted #aaa; }
+    .check-list label { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; }
+    .taskbar {
+      position: sticky; bottom: 0; z-index: 1000; height: 42px; display: flex; align-items: center;
+      gap: 5px; padding: 4px; background: var(--win-gray); border-top: 2px solid var(--win-light);
+      box-shadow: 0 -1px 0 var(--win-dark);
+    }
+    .start-button {
+      height: 32px; min-width: 81px; display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 3px 9px; background: var(--win-gray); border: 2px solid;
+      border-color: var(--win-light) var(--win-darker) var(--win-darker) var(--win-light);
+      font-weight: bold; font-size: 13px; color: #111;
+    }
+    .start-button:active, .start-button.active { border-color: var(--win-darker) var(--win-light) var(--win-light) var(--win-darker); }
+    .win-flag { width: 17px; height: 17px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; transform: skewY(-8deg); }
+    .win-flag i:nth-child(1) { background: #f44; } .win-flag i:nth-child(2) { background: #3a3; }
+    .win-flag i:nth-child(3) { background: #36c; } .win-flag i:nth-child(4) { background: #fc3; }
+    .task-items { display: flex; align-items: center; flex: 1; gap: 4px; min-width: 0; overflow-x: auto; }
+    .task-item {
+      min-width: 90px; max-width: 180px; height: 30px; padding: 3px 9px; overflow: hidden;
+      white-space: nowrap; text-overflow: ellipsis; text-align: left; background: var(--win-gray);
+      border: 2px solid; border-color: var(--win-light) var(--win-darker) var(--win-darker) var(--win-light);
+      font-size: 12px; color: #111;
+    }
+    .task-item.active { border-color: var(--win-darker) var(--win-light) var(--win-light) var(--win-darker); background: #d2d2d2; font-weight: bold; }
+    .tray { height: 30px; display: flex; align-items: center; gap: 8px; padding: 0 10px; margin-left: auto; border: 2px solid; border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark); font: 12px Tahoma, Arial, sans-serif; white-space: nowrap; }
+    .start-menu {
+      position: fixed; display: none; left: 4px; bottom: 44px; z-index: 2000;
+      width: 235px; padding: 4px; background: var(--win-gray);
+      border: 2px solid; border-color: var(--win-light) var(--win-darker) var(--win-darker) var(--win-light);
+      box-shadow: 2px 2px 3px rgba(0,0,0,.4);
+    }
+    .start-menu.open { display: flex; }
+    .start-side {
+      width: 34px; flex: 0 0 34px; display: flex; align-items: flex-end; justify-content: center;
+      padding: 8px 3px; background: linear-gradient(#000080,#1084d0); color: #fff;
+      writing-mode: vertical-rl; transform: rotate(180deg); font-weight: bold; letter-spacing: .07em;
+    }
+    .start-menu-items { flex: 1; padding: 3px; }
+    .start-menu-items button {
+      width: 100%; padding: 9px 8px; display: flex; align-items: center; gap: 9px;
+      border: 0; background: transparent; text-align: left; font-size: 13px; color: #111;
+    }
+    .start-menu-items button:hover { color: #fff; background: #000080; }
+    .start-menu-items hr { border: 0; border-top: 1px solid #888; border-bottom: 1px solid #fff; margin: 4px; }
+    .clock { font-size: 12px; }
+    .desktop-footer-note { text-align: center; padding: 8px 10px; background: #c0c0c0; color: #555; font-size: 11px; }
+
+    @media (max-width: 760px) {
+      .desktop { min-height: calc(100vh - 42px); padding: 14px 10px 76px; overflow: visible; }
+      .desktop-topline { padding: 0 5px 13px; }
+      .desktop-brand { font-size: 13px; }
+      .desktop-tagline { max-width: 190px; font-size: 10px; }
+      .desktop-status { font-size: 9px; padding: 5px 6px; }
+      .desktop-icons {
+        position: relative; top: auto; left: auto; z-index: 1; width: 100%;
+        flex-direction: row; flex-wrap: wrap; gap: 4px; margin: 4px 0 14px;
+      }
+      .desktop-icon { width: 72px; min-height: 67px; font-size: 10px; }
+      .desktop-icon .glyph { font-size: 23px; }
+      .window {
+        position: relative; left: auto !important; top: auto !important; width: 100%;
+        max-height: none; margin: 10px 0; z-index: 20;
+      }
+      .window.open { display: flex; }
+      .window.minimized { display: none; }
+      .window.maximized { position: relative; left: auto !important; top: auto !important; width: 100% !important; height: auto !important; }
+      .window-body { max-height: 68vh; }
+      .welcome-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr; }
+      .taskbar { position: sticky; }
+      .task-item { min-width: 72px; max-width: 115px; }
+      .tray { padding: 0 6px; gap: 4px; }
+      .start-menu { position: fixed; bottom: 44px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-      body::before { display: none; }
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
-
   </style>
 </head>
 <body>
-
-  <!-- Top System Warning Banner -->
-  <div class="status-bar">
-    <span class="pulse-dot"></span>
-    <span>BOOT STATUS: BATTERY AT 1% // HUMAN MODE: ON // STILL LOADING...</span>
-  </div>
-
-  <!-- Navigation -->
-  <header>
-    <div class="container nav-inner">
-      <a href="#" class="brand">
-        <span>1% BATTERY</span>
-        <span class="batt-pill">1%</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#errors">Daily Errors</a>
-        <a href="#club">The 1% Club</a>
-        <a href="#meme-maker">Meme Lab</a>
-        <a href="#token">Project Status</a>
-        <a href="#meme-maker" class="nav-cta">Make a meme ↗</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Hero Section -->
-    <section class="hero" style="border-top: none;">
+  <main class="desktop" id="desktop">
+    <div class="desktop-topline">
       <div>
-        <div class="badge">A LITTLE INTERNET CORNER FOR THE RUNNING-ON-EMPTY</div>
-        <h1>Not the billionaire 1%. <span class="accent-red">The 1% battery.</span></h1>
-        <p class="hero-sub">
-          Rent is due. The job listing wants five years of experience. AI just updated again. Your phone is at 1%.
-          Welcome to <strong>The 1% Club</strong> — for people figuring it out one day, one small win and one questionable coffee at a time.
-        </p>
+        <div class="desktop-brand">1% BATTERY <span style="color:#d9ff9c">/ THE 1% CLUB</span></div>
+        <div class="desktop-tagline">The future is updating. Your bills aren't.</div>
+      </div>
+      <div class="desktop-status"><span class="live-led"></span> SYSTEM ONLINE · CLUB OPEN</div>
+    </div>
 
-        <div class="hero-actions">
-          <a href="#meme-maker" class="btn btn-primary">MAKE YOUR OWN MEME ↗</a>
-          <a href="#club" class="btn btn-secondary">WHAT WE'RE ABOUT ↓</a>
+    <div class="desktop-icons" aria-label="Desktop applications">
+      <button class="desktop-icon" data-open="welcome"><span class="glyph">💾</span><span class="icon-label">1% Club</span></button>
+      <button class="desktop-icon" data-open="econ"><span class="glyph">💸</span><span class="icon-label">ECON.EXE</span></button>
+      <button class="desktop-icon" data-open="ai"><span class="glyph">🤖</span><span class="icon-label">AI.EXE</span></button>
+      <button class="desktop-icon" data-open="cyber"><span class="glyph">🛡️</span><span class="icon-label">CYBER.EXE</span></button>
+      <button class="desktop-icon" data-open="meme"><span class="glyph">🎨</span><span class="icon-label">Meme Lab</span></button>
+      <button class="desktop-icon" data-open="token"><span class="glyph">🔋</span><span class="icon-label">1PCT Info</span></button>
+    </div>
+
+    <section class="window open" id="window-welcome" data-window="welcome" style="left:150px;top:76px;width:650px" role="dialog" aria-labelledby="title-welcome">
+      <div class="titlebar">
+        <div class="title-left"><span class="title-icon">💾</span><span id="title-welcome">WELCOME.TXT — THE 1% CLUB</span></div>
+        <div class="title-controls">
+          <button class="win-control" data-action="minimize" aria-label="Minimize">_</button>
+          <button class="win-control" data-action="maximize" aria-label="Maximize">□</button>
+          <button class="win-control" data-action="close" aria-label="Close">×</button>
         </div>
+      </div>
+      <div class="window-body">
+        <div class="welcome-grid">
+          <div class="welcome-hero">
+            <div class="eyebrow">USER STATUS: HUMAN // POWER: 1%</div>
+            <h1>Not the billionaire 1%.<br><span>The 1% battery.</span></h1>
+            <p>Rent is due. The job listing wants five years of experience. AI just updated again. Your phone is at 1%.</p>
+            <p><strong>You're not the only one.</strong> Welcome to a little corner of the internet for people figuring it out — one laugh, one lesson and one small win at a time.</p>
+            <div class="win-row">
+              <button class="win-btn primary" data-open="econ">Open ECON.EXE</button>
+              <button class="win-btn" data-open="ai">Open AI.EXE</button>
+            </div>
+          </div>
+          <aside class="win-panel">
+            <strong>BATTERY STATUS</strong>
+            <div class="battery-meter"><div class="battery-fill"></div></div>
+            <div style="font:bold 12px 'Courier New',monospace;color:#a00000">1% — LOW POWER MODE</div>
+            <hr class="pixel-rule">
+            <strong>QUICK ACCESS</strong>
+            <div class="quick-launch">
+              <button class="win-btn" data-open="cyber">🛡 CYBER</button>
+              <button class="win-btn" data-open="meme">🎨 MEMES</button>
+              <button class="win-btn" data-open="club">💬 CLUB</button>
+              <button class="win-btn" data-open="token">🔋 1PCT</button>
+            </div>
+            <hr class="pixel-rule">
+            <div class="tiny muted">No perfect life plan required. Just come as you are.</div>
+          </aside>
+        </div>
+      </div>
+    </section>
 
-        <div class="ca-box status-note">
+    <section class="window" id="window-econ" data-window="econ" style="left:215px;top:105px;width:620px" role="dialog" aria-labelledby="title-econ">
+      <div class="titlebar">
+        <div class="title-left"><span class="title-icon">💸</span><span id="title-econ">ECON.EXE — PAYDAY.EXE HAS STOPPED RESPONDING</span></div>
+        <div class="title-controls"><button class="win-control" data-action="minimize" aria-label="Minimize">_</button><button class="win-control" data-action="maximize" aria-label="Maximize">□</button><button class="win-control" data-action="close" aria-label="Close">×</button></div>
+      </div>
+      <div class="window-body">
+        <div class="app-heading">ECONOMICS // THE EVERYDAY REALITY CHECK</div>
+        <h2>Payday came. Rent was waiting.</h2>
+        <p>Money talk can be stressful, so let's make it practical. Enter your own monthly numbers to see what remains after the basics. The calculation runs in this browser; nothing is sent to a server.</p>
+        <div class="stat-grid">
+          <div class="stat-tile"><b>THE PROBLEM</b><span>Rent, food, transport, bills and subscriptions all want their turn.</span></div>
+          <div class="stat-tile"><b>THE REALITY</b><span>A salary number is not the same as money left to live on.</span></div>
+          <div class="stat-tile"><b>THE IDEA</b><span>Know your numbers. No judgement, no miracle promises.</span></div>
+        </div>
+        <div class="win-inset">
+          <h3>MONTHLY MONEY CHECKER</h3>
+          <div class="stat-grid">
+            <div><label class="win-label" for="income">Net monthly income (€)</label><input class="win-input money-input" id="income" type="number" min="0" step="0.01" placeholder="e.g. 2400"></div>
+            <div><label class="win-label" for="rent">Rent / housing (€)</label><input class="win-input money-input" id="rent" type="number" min="0" step="0.01" placeholder="e.g. 900"></div>
+            <div><label class="win-label" for="bills">Bills / insurance (€)</label><input class="win-input money-input" id="bills" type="number" min="0" step="0.01" placeholder="e.g. 250"></div>
+            <div><label class="win-label" for="food">Food / groceries (€)</label><input class="win-input money-input" id="food" type="number" min="0" step="0.01" placeholder="e.g. 300"></div>
+            <div><label class="win-label" for="transport">Transport (€)</label><input class="win-input money-input" id="transport" type="number" min="0" step="0.01" placeholder="e.g. 60"></div>
+            <div><label class="win-label" for="subs">Subscriptions / other (€)</label><input class="win-input money-input" id="subs" type="number" min="0" step="0.01" placeholder="e.g. 40"></div>
+          </div>
+          <button class="win-btn primary" id="calculate-money">Calculate my month</button>
+          <div class="result-box" id="money-result" aria-live="polite">Enter your figures and select Calculate my month.</div>
+        </div>
+        <p class="tiny muted">Illustrative budgeting helper only. It does not provide financial advice or account for every personal expense.</p>
+      </div>
+    </section>
+
+    <section class="window" id="window-ai" data-window="ai" style="left:285px;top:92px;width:600px" role="dialog" aria-labelledby="title-ai">
+      <div class="titlebar">
+        <div class="title-left"><span class="title-icon">🤖</span><span id="title-ai">AI.EXE — HUMAN UPDATE AVAILABLE</span></div>
+        <div class="title-controls"><button class="win-control" data-action="minimize" aria-label="Minimize">_</button><button class="win-control" data-action="maximize" aria-label="Maximize">□</button><button class="win-control" data-action="close" aria-label="Close">×</button></div>
+      </div>
+      <div class="window-body">
+        <div class="app-heading">AI & THE FUTURE OF WORK // VERSION: STILL FIGURING IT OUT</div>
+        <h2>The world keeps updating. You don't need to panic.</h2>
+        <p>AI changes tasks, tools and expectations. You don't have to learn every new app or believe every dramatic headline. Start with the work you actually do.</p>
+        <div class="win-panel">
+          <h3>FOUR HUMAN PATCH NOTES</h3>
+          <ul>
+            <li><strong>Map your tasks.</strong> Notice repetitive work, research, drafting and admin that tools might help with.</li>
+            <li><strong>Try one workflow.</strong> Use AI to assist a real task instead of collecting another dozen subscriptions.</li>
+            <li><strong>Check the output.</strong> Verify facts, sources, calculations and anything important before relying on it.</li>
+            <li><strong>Keep your human edge.</strong> Build judgement, communication, context, creativity and accountability.</li>
+          </ul>
+        </div>
+        <hr class="pixel-rule">
+        <h3>TRY THIS PROMPT</h3>
+        <p class="tiny muted">Copy this into an AI assistant and adapt it to your own role.</p>
+        <div class="win-inset" id="ai-prompt">I work as [your role]. Help me identify 3 repetitive tasks AI could assist with, the risks I should check, and one small workflow I can test this week. Do not assume AI can replace the whole job.</div>
+        <div class="win-row" style="margin-top:10px"><button class="win-btn primary" id="copy-ai-prompt">Copy prompt</button><span class="tiny muted" id="ai-copy-status" aria-live="polite"></span></div>
+      </div>
+    </section>
+
+    <section class="window" id="window-cyber" data-window="cyber" style="left:255px;top:125px;width:640px" role="dialog" aria-labelledby="title-cyber">
+      <div class="titlebar">
+        <div class="title-left"><span class="title-icon">🛡️</span><span id="title-cyber">CYBER.EXE — THINK BEFORE YOU CLICK</span></div>
+        <div class="title-controls"><button class="win-control" data-action="minimize" aria-label="Minimize">_</button><button class="win-control" data-action="maximize" aria-label="Maximize">□</button><button class="win-control" data-action="close" aria-label="Close">×</button></div>
+      </div>
+      <div class="window-body">
+        <div class="app-heading">DIGITAL SURVIVAL // QUICK RED-FLAG CHECK</div>
+        <h2>Pause. Check the source. Then decide.</h2>
+        <p>Fake recruiters, urgent payment requests and account warnings can look convincing. Paste a message below to scan it for a few common warning signs.</p>
+        <label class="win-label" for="scam-text">PASTE A MESSAGE OR JOB OFFER</label>
+        <textarea class="win-textarea" id="scam-text" placeholder="Paste text here. Remove names, phone numbers, addresses and other personal details first."></textarea>
+        <div class="win-row" style="margin-top:9px">
+          <button class="win-btn primary" id="scan-message">Check warning signs</button>
+          <button class="win-btn" id="clear-message">Clear</button>
+        </div>
+        <div class="result-box" id="scam-result" aria-live="polite">Your text is checked locally in this page. It is not uploaded.</div>
+        <div class="win-panel" style="margin-top:12px">
+          <h3>THE 5-SECOND CHECK</h3>
+          <ul class="check-list">
+            <li><label><input type="checkbox"> Is the sender using an official company domain?</label></li>
+            <li><label><input type="checkbox"> Are they asking for money before you receive a service or job?</label></li>
+            <li><label><input type="checkbox"> Are they rushing you or threatening immediate consequences?</label></li>
+            <li><label><input type="checkbox"> Are they requesting passwords, one-time codes or recovery phrases?</label></li>
+            <li><label><input type="checkbox"> Can you verify the claim through a separate official channel?</label></li>
+          </ul>
+        </div>
+        <p class="tiny muted">This is an educational warning-sign check, not a security verdict. A clean result does not mean a message or URL is safe. Never paste passwords, private keys, seed phrases or unredacted personal data.</p>
+      </div>
+    </section>
+
+    <section class="window" id="window-meme" data-window="meme" style="left:205px;top:86px;width:690px" role="dialog" aria-labelledby="title-meme">
+      <div class="titlebar">
+        <div class="title-left"><span class="title-icon">🎨</span><span id="title-meme">MEME LAB — MAKE SOMETHING RELATABLE</span></div>
+        <div class="title-controls"><button class="win-control" data-action="minimize" aria-label="Minimize">_</button><button class="win-control" data-action="maximize" aria-label="Maximize">□</button><button class="win-control" data-action="close" aria-label="Close">×</button></div>
+      </div>
+      <div class="window-body">
+        <h2>Your day is a meme. Make it official.</h2>
+        <p>Choose a situation, write your own caption and save the image. Share it wherever your friends hang out.</p>
+        <div class="studio-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,.85fr);gap:12px;align-items:start">
+          <div class="win-inset" style="padding:8px;text-align:center"><canvas id="meme-canvas" width="560" height="560" style="width:100%;height:auto;max-width:560px;display:block"></canvas></div>
           <div>
-            <span class="ca-label">PROJECT STATUS // TOKEN INFORMATION</span>
-            <span class="ca-value">PRE-LAUNCH — NO VERIFIED CONTRACT ADDRESS PUBLISHED</span>
-          </div>
-          <span class="status-stamp">NOT LIVE</span>
-        </div>
-      </div>
-
-      <!-- Mascot Card (Custom Vector BATT Character) -->
-      <div class="mascot-card">
-        <div class="mascot-header">
-          <span>PLAYER_01: YOU</span>
-          <span style="color: var(--red); font-weight: 700;">[ENERGY: 1%]</span>
-        </div>
-        <div class="mascot-frame">
-          <!-- Replace this SVG with <img src="batt-avatar.png" alt="BATT 1% Mascot" style="width:100%;border-radius:10px;"> once you upload your artwork -->
-          <svg viewBox="0 0 360 340" width="320" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BATT 1 Percent Battery Mascot">
-            <!-- Floating 1% Battery HUD -->
-            <g transform="translate(118, 16)">
-              <rect x="0" y="0" width="116" height="44" rx="8" fill="#180A0B" stroke="#FF3B30" stroke-width="3"/>
-              <rect x="116" y="13" width="8" height="18" rx="2" fill="#FF3B30"/>
-              <rect x="7" y="7" width="14" height="30" rx="3" fill="#FF3B30"/>
-              <text x="66" y="29" fill="#FF3B30" font-family="monospace" font-weight="900" font-size="20" text-anchor="middle">1%</text>
-            </g>
-
-            <!-- Hoodie / Shoulders -->
-            <path d="M65 330 C65 255, 115 235, 180 235 C245 235, 295 255, 295 330 Z" fill="#1E293B" stroke="#000" stroke-width="4"/>
-            <!-- Frayed Charging Cable -->
-            <path d="M250 285 Q310 270 315 315" fill="none" stroke="#94A3B8" stroke-width="5" stroke-linecap="round"/>
-            <rect x="307" y="312" width="16" height="14" rx="2" fill="#CBD5E1" stroke="#000" stroke-width="2.5"/>
-            <line x1="312" y1="326" x2="312" y2="334" stroke="#FF3B30" stroke-width="2"/>
-            <line x1="318" y1="326" x2="318" y2="334" stroke="#39FF14" stroke-width="2"/>
-
-            <!-- Neck -->
-            <rect x="158" y="205" width="44" height="38" rx="10" fill="#E2C6B1" stroke="#000" stroke-width="4"/>
-
-            <!-- Head -->
-            <rect x="108" y="88" width="144" height="132" rx="46" fill="#F1D5C1" stroke="#000" stroke-width="4"/>
-
-            <!-- Cyborg Side Plate -->
-            <path d="M225 110 L252 118 L252 178 L225 186 Z" fill="#64748B" stroke="#000" stroke-width="3.5"/>
-            <circle cx="239" cy="148" r="5" fill="#FF3B30"/>
-
-            <!-- Messy Hair -->
-            <path d="M98 135 C95 75, 145 62, 182 68 C222 60, 265 80, 260 132 C245 104, 220 98, 195 104 C172 88, 145 92, 128 106 C112 102, 102 115, 98 135 Z" fill="#111827" stroke="#000" stroke-width="4"/>
-
-            <!-- Tired Eyes & Dark Circles -->
-            <ellipse cx="148" cy="152" rx="17" ry="11" fill="#FFF" stroke="#000" stroke-width="3.5"/>
-            <circle cx="148" cy="153" r="4.5" fill="#0B0E14"/>
-            <line x1="130" y1="146" x2="166" y2="149" stroke="#000" stroke-width="4"/>
-            <path d="M134 167 Q148 173 162 167" fill="none" stroke="#9A6B56" stroke-width="2.5"/>
-
-            <ellipse cx="204" cy="152" rx="17" ry="11" fill="#FFF" stroke="#000" stroke-width="3.5"/>
-            <circle cx="204" cy="153" r="4.5" fill="#0B0E14"/>
-            <line x1="186" y1="149" x2="222" y2="146" stroke="#000" stroke-width="4"/>
-            <path d="M190 167 Q204 173 218 167" fill="none" stroke="#9A6B56" stroke-width="2.5"/>
-
-            <!-- Unbothered Flat Mouth -->
-            <path d="M162 192 Q180 189 198 193" fill="none" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
-
-            <!-- Iced Coffee Cup -->
-            <g transform="translate(88, 232)">
-              <polygon points="8,18 46,18 40,84 14,84" fill="#D97706" stroke="#000" stroke-width="3.5"/>
-              <rect x="4" y="10" width="46" height="9" rx="3" fill="#F8FAFC" stroke="#000" stroke-width="3"/>
-              <line x1="32" y1="-8" x2="26" y2="10" stroke="#39FF14" stroke-width="4" stroke-linecap="round"/>
-            </g>
-          </svg>
-        </div>
-        <div class="mascot-footer">
-          <span>STATUS: DOING YOUR BEST</span>
-          <span>QUEST: MAKE IT THROUGH TODAY</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3 Pillars / System Errors -->
-    <section id="errors">
-      <div class="section-tag">// DAILY DIAGNOSTICS</div>
-      <h2>Three things draining your last 1%.</h2>
-      <p class="section-desc">
-          Different lives, different pressures. These are three conversations many of us are having — without pretending one meme can explain everyone's experience.
-        </p>
-
-      <div class="grid-3">
-        <div class="card">
-          <span class="card-code">ERR_01 // ECON.EXE</span>
-          <h3>Salary Hit. Rent Claimed It.</h3>
-          <p>
-            Payday arrives. Rent, groceries, transport and subscriptions already know the date. The maths can feel relentless.
-          </p>
-        </div>
-        <div class="card">
-          <span class="card-code">ERR_02 // AI.EXE</span>
-          <h3>Updating Every Monday.</h3>
-          <p>
-            Trying to build a career while tools, expectations and job descriptions keep changing. Is there an update for humans?
-          </p>
-        </div>
-        <div class="card">
-          <span class="card-code">ERR_03 // CYBER.EXE</span>
-          <h3>Scammers Everywhere.</h3>
-          <p>
-            Fake recruiters, phishing links and deepfakes are everywhere. Pause, check the source and ask for a second opinion. No shame in being careful.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- The 1% Club -->
-    <section id="club" class="club-section">
-      <div class="section-tag">// YOU ARE NOT THE ONLY ONE</div>
-      <h2>Some days, just showing up is the win.</h2>
-      <p class="section-desc">
-        No perfect morning routine. No five-year plan required. Just a place to laugh at the glitches, swap things we've learned and give each other a little room to figure it out.
-      </p>
-      <div class="grid-3 club-grid">
-        <div class="card">
-          <span class="card-code">01 // EXHALE</span>
-          <h3>Laugh at the chaos.</h3>
-          <p>Turn the weird, frustrating and very human moments into memes. Sometimes a laugh is a decent restart.</p>
-        </div>
-        <div class="card">
-          <span class="card-code">02 // SHARE</span>
-          <h3>Pass on what helps.</h3>
-          <p>A useful AI workflow, a scam warning or a money-saving tip. Small bits of knowledge can make someone's day easier.</p>
-        </div>
-        <div class="card">
-          <span class="card-code">03 // KEEP GOING</span>
-          <h3>Count the small wins.</h3>
-          <p>Finished the application? Took a break? Asked for help? That counts. Progress does not need to look impressive.</p>
-        </div>
-      </div>
-      <div class="community-note">
-        <strong>THE 1% CLUB RULE:</strong> You don't need to connect a wallet or buy anything to enjoy the memes. This page is a starting point — make something, save it and share it with someone who gets it.
-      </div>
-    </section>
-
-    <!-- Interactive Community Meme Generator -->
-    <section id="meme-maker">
-      <div class="section-tag">// UGC REMIX ENGINE</div>
-      <h2>Your day is a meme. Make it official.</h2>
-      <p class="section-desc">
-        Pick a preset or write your own daily system error. Download the image and share it wherever your friends hang out.
-      </p>
-
-      <div class="studio-grid">
-        <div class="canvas-wrap">
-          <canvas id="meme-canvas" width="600" height="600"></canvas>
-        </div>
-
-        <div class="studio-controls">
-          <div class="input-group">
-            <label for="preset-select">QUICK PRESET CAPTIONS</label>
-            <select id="preset-select">
-              <option value="THE FUTURE IS UPDATING.|YOUR BILLS AREN'T.">1. The future is updating. Your bills aren't.</option>
-              <option value="NOT THE BILLIONAIRE 1%.|THE 1% BATTERY.">2. Not the billionaire 1%. The 1% battery.</option>
-              <option value="SALARY ARRIVED AT 9:01 AM.|RENT EVICTED IT AT 9:02 AM.">3. Salary arrived at 9:01 AM. Rent evicted it.</option>
-              <option value="AI MAKES YOU 10X FASTER.|SO YOU GET 10X MORE WORK.">4. AI makes you 10x faster. 10x more work.</option>
-              <option value="CONGRATS YOU GOT THE JOB!|PLEASE PAY $49 FOR YOUR LAPTOP.">5. Fake recruiter onboarding fee.</option>
+            <label class="win-label" for="preset-select">QUICK CAPTIONS</label>
+            <select class="win-select" id="preset-select">
+              <option value="THE FUTURE IS UPDATING.|YOUR BILLS AREN'T.">The future is updating</option>
+              <option value="NOT THE BILLIONAIRE 1%.|THE 1% BATTERY.">Not the billionaire 1%</option>
+              <option value="SALARY ARRIVED AT 9:01.|RENT CLAIMED IT AT 9:02.">Salary vs rent</option>
+              <option value="AI MAKES ME 10X FASTER.|NOW I GET 10X THE WORK.">AI productivity</option>
+              <option value="ENTRY LEVEL ROLE.|5 YEARS EXPERIENCE REQUIRED.">Entry-level paradox</option>
+              <option value="CONGRATS, YOU GOT THE JOB!|PLEASE PAY THE ONBOARDING FEE.">Fake recruiter</option>
+              <option value="I'LL JUST OPEN ONE TAB.|47 TABS LATER...">Browser tabs</option>
             </select>
+            <label class="win-label" for="top-text">TOP LINE</label>
+            <input class="win-input" id="top-text" type="text" maxlength="55" value="THE FUTURE IS UPDATING.">
+            <label class="win-label" for="bottom-text">BOTTOM LINE</label>
+            <input class="win-input" id="bottom-text" type="text" maxlength="55" value="YOUR BILLS AREN'T.">
+            <button class="win-btn primary" id="download-meme-btn" style="margin-top:12px;width:100%">Save meme as PNG</button>
+            <p class="tiny muted">Your meme is generated in your browser. Your text is not uploaded.</p>
           </div>
-
-          <div class="input-group">
-            <label for="top-text">TOP LINE</label>
-            <input id="top-text" type="text" maxlength="48" value="THE FUTURE IS UPDATING." />
-          </div>
-
-          <div class="input-group">
-            <label for="bottom-text">BOTTOM LINE</label>
-            <input id="bottom-text" type="text" maxlength="48" value="YOUR BILLS AREN'T." />
-          </div>
-
-          <button id="download-meme-btn" class="btn btn-primary" type="button">
-            Download Meme PNG
-          </button>
         </div>
       </div>
     </section>
 
-    <!-- Project Status -->
-    <section id="token">
-      <div class="section-tag">// PROJECT STATUS</div>
-      <h2>Still loading. No fake green lights.</h2>
-      <p class="section-desc">
-        We're building the identity and the community first. Token information below is provisional until a real on-chain launch can be independently verified.
-      </p>
-
-      <div class="specs-grid">
-        <div class="spec-item">
-          <span>Brand</span>
-          <strong>1% BATTERY</strong>
-        </div>
-        <div class="spec-item">
-          <span>Symbol</span>
-          <strong>$1PCT*</strong>
-        </div>
-        <div class="spec-item">
-          <span>Network</span>
-          <strong>Solana (planned)</strong>
-        </div>
-        <div class="spec-item">
-          <span>Token status</span>
-          <strong>Pre-launch</strong>
-        </div>
+    <section class="window" id="window-club" data-window="club" style="left:320px;top:145px;width:570px" role="dialog" aria-labelledby="title-club">
+      <div class="titlebar">
+        <div class="title-left"><span class="title-icon">💬</span><span id="title-club">THE 1% CLUB — BATTERY CHECK</span></div>
+        <div class="title-controls"><button class="win-control" data-action="minimize" aria-label="Minimize">_</button><button class="win-control" data-action="maximize" aria-label="Maximize">□</button><button class="win-control" data-action="close" aria-label="Close">×</button></div>
       </div>
-      <p class="status-footnote">*Project-selected symbol, not a verified mint address. No supply, liquidity, market or launch claim is made on this page. Always verify a contract address independently before interacting with any token.</p>
+      <div class="window-body">
+        <div class="app-heading">COMMUNITY STATUS: ONLINE // EVERY HUMAN WELCOME</div>
+        <h2>Some days, just showing up is the win.</h2>
+        <p>No perfect morning routine. No five-year plan required. Just a place to laugh at the glitches, swap things we've learned and give each other a little room to figure it out.</p>
+        <div class="win-panel">
+          <label class="win-label" for="battery-check">WHAT'S DRAINING YOUR BATTERY TODAY?</label>
+          <input class="win-input" id="battery-check" maxlength="140" placeholder="Rent, job hunt, life admin, 47 browser tabs...">
+          <div class="win-row" style="margin-top:9px">
+            <button class="win-btn primary" id="copy-battery-check">Copy my battery check</button>
+            <span class="tiny muted" id="battery-copy-status" aria-live="polite"></span>
+          </div>
+        </div>
+        <hr class="pixel-rule">
+        <h3>THE 1% CLUB RULES</h3>
+        <ul>
+          <li>Laugh at the situation, not at people who are struggling.</li>
+          <li>Share what helps. Check facts before reposting.</li>
+          <li>Never ask anyone for a password, seed phrase or private key.</li>
+          <li>No fake giveaways, impersonation or pressure to buy anything.</li>
+          <li>You don't need to own a token to belong here.</li>
+        </ul>
+      </div>
     </section>
+
+    <section class="window" id="window-token" data-window="token" style="left:350px;top:180px;width:520px" role="dialog" aria-labelledby="title-token">
+      <div class="titlebar">
+        <div class="title-left"><span class="title-icon">🔋</span><span id="title-token">1PCT.TXT — PROJECT INFO</span></div>
+        <div class="title-controls"><button class="win-control" data-action="minimize" aria-label="Minimize">_</button><button class="win-control" data-action="maximize" aria-label="Maximize">□</button><button class="win-control" data-action="close" aria-label="Close">×</button></div>
+      </div>
+      <div class="window-body">
+        <div class="app-heading">1% BATTERY // THE INTERNET CULTURE CLUB</div>
+        <h2>Not the billionaire 1%. The 1% battery.</h2>
+        <div class="stat-grid">
+          <div class="stat-tile"><b>PROJECT</b><span>1% BATTERY</span></div>
+          <div class="stat-tile"><b>SYMBOL</b><span>$1PCT</span></div>
+          <div class="stat-tile"><b>ECOSYSTEM</b><span>Solana</span></div>
+        </div>
+        <p>The 1% Club is a community about the everyday realities of work, money, AI and online life. The token is speculative and can lose all of its value.</p>
+        <p class="tiny muted">Always verify the official mint address and market independently before interacting with a token. This page does not ask for a wallet connection, private key or seed phrase.</p>
+      </div>
+    </section>
+
+    <div class="desktop-hint">TIP: Double-click a desktop icon, or use the Start menu.<br>Windows can be minimized, closed and moved around.</div>
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-top">
-        <div class="brand">
-          <span>1% BATTERY ($1PCT)</span>
-          <span class="batt-pill">1%</span>
-        </div>
-        <div class="footer-links">
-          <a href="#errors">Daily errors</a>
-          <a href="#club">The 1% Club</a>
-          <a href="#meme-maker">Meme lab</a>
-          <a href="#token">Project status</a>
-          <a href="#">Back to top ↑</a>
-        </div>
-      </div>
-
-      <div class="disclaimer">
-        <strong>PLEASE READ:</strong> 1% BATTERY is an internet-culture project and this page is a pre-launch concept site. The proposed $1PCT symbol is not a verified contract address, and no token supply, market, liquidity or launch status is represented here as live. If a token is launched, it will be highly speculative and may lose all value. Nothing on this site is investment advice or a promise of returns, utility or liquidity. Never share a wallet seed phrase or private key, and independently verify any future contract address.
-      </div>
+  <div class="start-menu" id="start-menu" aria-label="Start menu">
+    <div class="start-side">1% BATTERY</div>
+    <div class="start-menu-items">
+      <button data-open="welcome">💾 <strong>Welcome to the 1% Club</strong></button>
+      <hr>
+      <button data-open="econ">💸 ECON.EXE</button>
+      <button data-open="ai">🤖 AI.EXE</button>
+      <button data-open="cyber">🛡️ CYBER.EXE</button>
+      <button data-open="meme">🎨 Meme Lab</button>
+      <button data-open="club">💬 Battery Check</button>
+      <button data-open="token">🔋 1PCT Project Info</button>
+      <hr>
+      <button id="close-start-menu">↩ Close menu</button>
     </div>
+  </div>
+
+  <footer class="taskbar">
+    <button class="start-button" id="start-button" aria-expanded="false" aria-controls="start-menu">
+      <span class="win-flag"><i></i><i></i><i></i><i></i></span> Start
+    </button>
+    <div class="task-items" id="task-items" aria-label="Open windows"></div>
+    <div class="tray"><span>🔋 1%</span><span class="clock" id="clock">--:--</span></div>
   </footer>
+  <div class="desktop-footer-note">1% BATTERY · THE 1% CLUB · THE FUTURE IS UPDATING. YOUR BILLS AREN'T.</div>
 
   <script>
-    // External social, chart and token links are intentionally omitted until verified.
+    (function () {
+      "use strict";
+      var desktop = document.getElementById("desktop");
+      var windows = Array.prototype.slice.call(document.querySelectorAll(".window"));
+      var taskItems = document.getElementById("task-items");
+      var startButton = document.getElementById("start-button");
+      var startMenu = document.getElementById("start-menu");
+      var zIndex = 20;
 
-    // =========================================================================
-    // 2. BUILT-IN CANVAS MEME GENERATOR (ZERO EXTERNAL ASSETS NEEDED)
-    // =========================================================================
-    const canvas = document.getElementById("meme-canvas");
-    const ctx = canvas.getContext("2d");
-    const topInput = document.getElementById("top-text");
-    const bottomInput = document.getElementById("bottom-text");
-    const presetSelect = document.getElementById("preset-select");
+      function getWindow(name) { return document.querySelector('[data-window="' + name + '"]'); }
+      function getTitle(win) {
+        var title = win.querySelector(".title-left span:last-child");
+        return title ? title.textContent : "1% BATTERY";
+      }
+      function setActiveTask(name) {
+        Array.prototype.forEach.call(taskItems.children, function (button) {
+          button.classList.toggle("active", button.getAttribute("data-task") === name);
+        });
+      }
+      function ensureTask(win) {
+        var name = win.getAttribute("data-window");
+        var existing = taskItems.querySelector('[data-task="' + name + '"]');
+        if (existing) return existing;
+        var button = document.createElement("button");
+        button.className = "task-item";
+        button.setAttribute("data-task", name);
+        button.textContent = getTitle(win).replace(" — ", " ");
+        button.addEventListener("click", function () {
+          if (win.classList.contains("open") && !win.classList.contains("minimized") && win.style.display !== "none") {
+            minimizeWindow(win);
+          } else {
+            restoreWindow(win);
+          }
+        });
+        taskItems.appendChild(button);
+        return button;
+      }
+      function focusWindow(win) {
+        if (!win) return;
+        zIndex += 1;
+        win.style.zIndex = String(zIndex);
+        setActiveTask(win.getAttribute("data-window"));
+      }
+      function openWindow(name) {
+        var win = getWindow(name);
+        if (!win) return;
+        win.classList.add("open");
+        win.classList.remove("minimized");
+        win.style.display = "flex";
+        ensureTask(win);
+        focusWindow(win);
+        startMenu.classList.remove("open");
+        startButton.classList.remove("active");
+        startButton.setAttribute("aria-expanded", "false");
+      }
+      function minimizeWindow(win) {
+        win.classList.add("minimized");
+        win.classList.remove("open");
+        win.style.display = "none";
+        setActiveTask("");
+      }
+      function restoreWindow(win) {
+        win.classList.remove("minimized");
+        win.classList.add("open");
+        win.style.display = "flex";
+        focusWindow(win);
+      }
+      function closeWindow(win) {
+        var name = win.getAttribute("data-window");
+        win.classList.remove("open", "minimized", "maximized");
+        win.style.display = "none";
+        var task = taskItems.querySelector('[data-task="' + name + '"]');
+        if (task) task.remove();
+        setActiveTask("");
+      }
 
-    function wrapText(context, text, x, y, maxWidth, lineHeight) {
-      const words = text.toUpperCase().split(" ");
-      let line = "";
-      const lines = [];
+      document.addEventListener("click", function (event) {
+        var opener = event.target.closest("[data-open]");
+        if (opener) {
+          openWindow(opener.getAttribute("data-open"));
+          return;
+        }
+        var action = event.target.closest("[data-action]");
+        if (action) {
+          var win = action.closest(".window");
+          var kind = action.getAttribute("data-action");
+          if (kind === "close") closeWindow(win);
+          if (kind === "minimize") minimizeWindow(win);
+          if (kind === "maximize") {
+            win.classList.toggle("maximized");
+            focusWindow(win);
+          }
+          return;
+        }
+      });
 
-      for (let n = 0; n < words.length; n++) {
-        const testLine = line + words[n] + " ";
-        const metrics = context.measureText(testLine);
-        if (metrics.width > maxWidth && n > 0) {
-          lines.push(line.trim());
-          line = words[n] + " ";
+      windows.forEach(function (win) {
+        win.addEventListener("pointerdown", function () { focusWindow(win); });
+        var bar = win.querySelector(".titlebar");
+        var drag = null;
+        bar.addEventListener("pointerdown", function (event) {
+          if (event.target.closest("button") || win.classList.contains("maximized") || window.innerWidth <= 760) return;
+          var rect = win.getBoundingClientRect();
+          var parent = desktop.getBoundingClientRect();
+          drag = { x: event.clientX - rect.left, y: event.clientY - rect.top, parent: parent };
+          bar.setPointerCapture(event.pointerId);
+          focusWindow(win);
+        });
+        bar.addEventListener("pointermove", function (event) {
+          if (!drag) return;
+          var left = event.clientX - drag.parent.left - drag.x;
+          var top = event.clientY - drag.parent.top - drag.y;
+          var maxLeft = Math.max(0, desktop.clientWidth - win.offsetWidth);
+          var maxTop = Math.max(0, desktop.clientHeight - 65);
+          win.style.left = Math.max(0, Math.min(left, maxLeft)) + "px";
+          win.style.top = Math.max(0, Math.min(top, maxTop)) + "px";
+        });
+        function stopDrag() { drag = null; }
+        bar.addEventListener("pointerup", stopDrag);
+        bar.addEventListener("pointercancel", stopDrag);
+        bar.addEventListener("lostpointercapture", stopDrag);
+      });
+
+      startButton.addEventListener("click", function () {
+        var open = startMenu.classList.toggle("open");
+        startButton.classList.toggle("active", open);
+        startButton.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      document.getElementById("close-start-menu").addEventListener("click", function () {
+        startMenu.classList.remove("open");
+        startButton.classList.remove("active");
+        startButton.setAttribute("aria-expanded", "false");
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          if (startMenu.classList.contains("open")) {
+            startMenu.classList.remove("open");
+            startButton.classList.remove("active");
+            startButton.setAttribute("aria-expanded", "false");
+          } else {
+            var open = windows.filter(function (win) { return win.classList.contains("open"); });
+            if (open.length) closeWindow(open.sort(function (a,b) { return Number(b.style.zIndex || 0) - Number(a.style.zIndex || 0); })[0]);
+          }
+        }
+      });
+
+      function updateClock() {
+        var now = new Date();
+        document.getElementById("clock").textContent = now.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+      }
+      updateClock();
+      window.setInterval(updateClock, 30000);
+
+      // Monthly budget helper — all calculations remain in this browser.
+      document.getElementById("calculate-money").addEventListener("click", function () {
+        var ids = ["income", "rent", "bills", "food", "transport", "subs"];
+        var values = {};
+        ids.forEach(function (id) {
+          var value = Number(document.getElementById(id).value || 0);
+          values[id] = Number.isFinite(value) && value >= 0 ? value : 0;
+        });
+        if (values.income <= 0) {
+          document.getElementById("money-result").className = "result-box warn";
+          document.getElementById("money-result").textContent = "Add your net monthly income first. Enter 0 for any expense that does not apply.";
+          return;
+        }
+        var costs = values.rent + values.bills + values.food + values.transport + values.subs;
+        var left = values.income - costs;
+        var result = document.getElementById("money-result");
+        result.className = "result-box " + (left >= 0 ? "good" : "warn");
+        result.textContent = "Estimated monthly remainder: " + left.toLocaleString(undefined,{style:"currency",currency:"EUR"}) +
+          " · Listed expenses use " + Math.round((costs / values.income) * 100) + "% of your net income.";
+      });
+
+      // Local-only warning pattern scan. It is not a verdict or a malware scanner.
+      document.getElementById("scan-message").addEventListener("click", function () {
+        var text = document.getElementById("scam-text").value || "";
+        var patterns = [
+          {label:"Upfront payment or registration fee", regex:/\b(upfront fee|registration fee|processing fee|pay.{0,25}(first|before|to start)|payment required)\b/i},
+          {label:"Urgency or pressure", regex:/\b(act now|immediately|urgent|within 24 hours|account.{0,20}(blocked|suspended|closed)|final warning)\b/i},
+          {label:"Password, one-time code or recovery phrase request", regex:/\b(password|one[- ]time code|otp|seed phrase|recovery phrase|private key)\b/i},
+          {label:"Gift card, crypto or unusual payment request", regex:/\b(gift card|crypto transfer|bitcoin|wallet transfer|wire transfer)\b/i},
+          {label:"Unusually attractive reward or guarantee", regex:/\b(guaranteed.{0,20}(profit|return|income)|you have won|risk[- ]free|instant.{0,15}(profit|wealth))\b/i},
+          {label:"Remote-access request", regex:/\b(remote access|install.{0,20}(anydesk|teamviewer)|screen sharing app)\b/i}
+        ];
+        var matches = patterns.filter(function (item) { return item.regex.test(text); });
+        var result = document.getElementById("scam-result");
+        result.className = "result-box " + (matches.length ? "warn" : "good");
+        result.textContent = "";
+        var heading = document.createElement("strong");
+        heading.textContent = matches.length ? matches.length + " warning pattern(s) found:" : "No listed warning pattern found.";
+        result.appendChild(heading);
+        var list = document.createElement("ul");
+        list.style.margin = "6px 0 0 18px";
+        list.style.padding = "0";
+        if (matches.length) {
+          matches.forEach(function (item) {
+            var li = document.createElement("li");
+            li.textContent = item.label;
+            list.appendChild(li);
+          });
         } else {
-          line = testLine;
+          var li = document.createElement("li");
+          li.textContent = "This does not mean the message is safe. Verify the sender independently.";
+          list.appendChild(li);
+        }
+        result.appendChild(list);
+        var note = document.createElement("div");
+        note.className = "tiny";
+        note.style.marginTop = "7px";
+        note.textContent = "Checked locally in this page. This is a limited educational check, not a security verdict.";
+        result.appendChild(note);
+      });
+      document.getElementById("clear-message").addEventListener("click", function () {
+        document.getElementById("scam-text").value = "";
+        var result = document.getElementById("scam-result");
+        result.className = "result-box";
+        result.textContent = "Your text is checked locally in this page. It is not uploaded.";
+      });
+
+      function copyText(text, statusElement) {
+        function done(message) { if (statusElement) statusElement.textContent = message; }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { done("Copied."); }).catch(function () { done("Copy unavailable in this browser."); });
+        } else {
+          var area = document.createElement("textarea");
+          area.value = text;
+          area.setAttribute("readonly", "");
+          area.style.position = "fixed";
+          area.style.opacity = "0";
+          document.body.appendChild(area);
+          area.select();
+          try { document.execCommand("copy"); done("Copied."); }
+          catch (error) { done("Copy unavailable in this browser."); }
+          document.body.removeChild(area);
         }
       }
-      lines.push(line.trim());
-
-      lines.forEach((l, idx) => {
-        const offsetY = y + idx * lineHeight;
-        context.lineWidth = 6;
-        context.strokeStyle = "#000000";
-        context.strokeText(l, x, offsetY);
-        context.fillStyle = "#F8FAFC";
-        context.fillText(l, x, offsetY);
+      document.getElementById("copy-ai-prompt").addEventListener("click", function () {
+        copyText(document.getElementById("ai-prompt").textContent, document.getElementById("ai-copy-status"));
       });
-    }
+      document.getElementById("copy-battery-check").addEventListener("click", function () {
+        var value = document.getElementById("battery-check").value.trim();
+        if (!value) {
+          document.getElementById("battery-copy-status").textContent = "Write a quick check-in first.";
+          return;
+        }
+        copyText("BATTERY CHECK: " + value + " — 1% BATTERY / THE 1% CLUB", document.getElementById("battery-copy-status"));
+      });
 
-    function renderMeme() {
-      // Dark background
-      ctx.fillStyle = "#10150D";
-      ctx.fillRect(0, 0, 600, 600);
-
-      // Subtle Grid
-      ctx.strokeStyle = "rgba(183,243,74,0.10)";
-      ctx.lineWidth = 1;
-      for (let i = 0; i < 600; i += 30) {
-        ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 600); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(600, i); ctx.stroke();
+      // Meme generator
+      var canvas = document.getElementById("meme-canvas");
+      var ctx = canvas.getContext("2d");
+      var topInput = document.getElementById("top-text");
+      var bottomInput = document.getElementById("bottom-text");
+      var presetSelect = document.getElementById("preset-select");
+      function drawWrapped(text, x, y, maxWidth, lineHeight) {
+        ctx.font = "bold 30px Impact, Arial Black, sans-serif";
+        var words = text.toUpperCase().split(/\s+/);
+        var lines = [];
+        var line = "";
+        words.forEach(function (word) {
+          var test = line ? line + " " + word : word;
+          if (ctx.measureText(test).width > maxWidth && line) {
+            lines.push(line);
+            line = word;
+          } else line = test;
+        });
+        if (line) lines.push(line);
+        lines.slice(0,3).forEach(function (item,index) {
+          var yy = y + index * lineHeight;
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = "#111";
+          ctx.fillStyle = "#fff";
+          ctx.textAlign = "center";
+          ctx.strokeText(item, x, yy, maxWidth);
+          ctx.fillText(item, x, yy, maxWidth);
+        });
       }
+      function renderMeme() {
+        ctx.fillStyle = "#087E7A";
+        ctx.fillRect(0,0,560,560);
+        ctx.fillStyle = "rgba(255,255,255,.08)";
+        for (var y=0;y<560;y+=28) for (var x=0;x<560;x+=28) ctx.fillRect(x,y,1,1);
+        ctx.fillStyle = "#c0c0c0";
+        ctx.fillRect(92,205,376,150);
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(98,211,364,138);
+        ctx.strokeStyle = "#404040";
+        ctx.lineWidth = 5;
+        ctx.strokeRect(92,205,376,150);
+        ctx.fillStyle = "#000080";
+        ctx.fillRect(102,216,356,28);
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 15px Tahoma, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText("1% BATTERY — SYSTEM MESSAGE", 112,235);
+        ctx.fillStyle = "#b00000";
+        ctx.font = "bold 72px Arial Black, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("1%",280,325);
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 30px Impact, Arial Black, sans-serif";
+        drawWrapped(topInput.value,280,65,510,36);
+        drawWrapped(bottomInput.value,280,430,510,36);
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 14px Courier New, monospace";
+        ctx.textAlign = "center";
+        ctx.fillText("SURVIVAL MODE: ON  |  THE 1% CLUB",280,525);
+      }
+      presetSelect.addEventListener("change", function () {
+        var parts = presetSelect.value.split("|");
+        topInput.value = parts[0] || "";
+        bottomInput.value = parts[1] || "";
+        renderMeme();
+      });
+      topInput.addEventListener("input", renderMeme);
+      bottomInput.addEventListener("input", renderMeme);
+      document.getElementById("download-meme-btn").addEventListener("click", function () {
+        var link = document.createElement("a");
+        link.download = "1pct-meme.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
 
-      // 1% Battery Graphic in Center
-      ctx.save();
-      ctx.translate(185, 195);
-      // Battery Outline
-      ctx.fillStyle = "#180A0B";
-      ctx.strokeStyle = "#FF3B30";
-      ctx.lineWidth = 8;
-      ctx.beginPath();
-      ctx.roundRect(0, 0, 210, 96, 16);
-      ctx.fill();
-      ctx.stroke();
-
-      // Battery Tip
-      ctx.fillStyle = "#FF3B30";
-      ctx.fillRect(214, 28, 16, 40);
-
-      // 1% Red Charge Bar
-      ctx.fillStyle = "#FF3B30";
-      ctx.beginPath();
-      ctx.roundRect(14, 14, 24, 68, 6);
-      ctx.fill();
-
-      // 1% Label
-      ctx.fillStyle = "#FF3B30";
-      ctx.font = "900 44px monospace";
-      ctx.textAlign = "center";
-      ctx.fillText("1%", 122, 63);
-      ctx.restore();
-
-      // Status Pill
-      ctx.fillStyle = "#B7F34A";
-      ctx.font = "700 16px monospace";
-      ctx.textAlign = "center";
-      ctx.fillText("SURVIVAL MODE: ON  |  THE 1% CLUB", 300, 335);
-
-      // Meme Top & Bottom Text
-      ctx.font = "900 32px Impact, Arial Black, sans-serif";
-      ctx.textAlign = "center";
-      wrapText(ctx, topInput.value, 300, 68, 540, 38);
-      wrapText(ctx, bottomInput.value, 300, 480, 540, 38);
-
-      // Watermark
-      ctx.fillStyle = "#39FF14";
-      ctx.font = "700 14px monospace";
-      ctx.fillText("1% BATTERY • THE 1% CLUB", 300, 578);
-    }
-
-    presetSelect.addEventListener("change", () => {
-      const [top, bottom] = presetSelect.value.split("|");
-      topInput.value = top || "";
-      bottomInput.value = bottom || "";
-      renderMeme();
-    });
-
-    topInput.addEventListener("input", renderMeme);
-    bottomInput.addEventListener("input", renderMeme);
-
-    document.getElementById("download-meme-btn").addEventListener("click", () => {
-      const link = document.createElement("a");
-      link.download = "1pct-meme.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    });
-
-    renderMeme();
+      // Start on the welcome desktop window.
+      openWindow("welcome");
+    }());
   </script>
 </body>
 </html>
