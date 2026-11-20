@@ -4,7 +4,7 @@
 
 1% BATTERY is an internet-culture project built around the feeling of trying to navigate modern life with 1% battery left. Its themes are economic pressure, AI and the future of work, and cybersecurity and online safety.
 
-> **Project status:** The repository currently contains a landing-page prototype. Do not treat the token as launched, the displayed token specifications as verified, or the placeholder links as official live destinations until they have been independently confirmed.
+> **Project status:** The repository contains a pre-launch landing-page prototype. No verified token contract, live market, token supply or liquidity is published on the site. The site intentionally has no X or Telegram links configured.
 
 ## Project identity
 
@@ -22,10 +22,11 @@ The project is intended to use humour and community participation to explore thr
 
 ## What's in this repository
 
-- `index.html` — a responsive single-page landing site.
+- `index.html` — a responsive, retro CRT/terminal-inspired single-page landing site.
 - A built-in canvas meme generator with preset captions and custom top/bottom text.
-- Project sections introducing the three themes and displaying token information.
-- Placeholder links and contract-address text that must be replaced before public promotion.
+- Sections about everyday economic pressure, AI and cybersecurity.
+- A community-focused introduction to The 1% Club.
+- A project-status panel that clearly labels the token as pre-launch until verified.
 
 The landing page is plain HTML, CSS and JavaScript. It does not require a package manager, build step or server-side application.
 
@@ -43,21 +44,11 @@ Then visit:
 http://localhost:8000
 ```
 
-## Configure the website before publishing
+## Website configuration
 
-Open the `CONFIG` object near the bottom of `index.html` and replace the placeholders only when the official destinations exist and have been verified:
+The current site intentionally has no X, Telegram, Pump.fun or chart links. It also does not display a copyable contract address because no verified mint address has been added.
 
-```js
-const CONFIG = {
-  CONTRACT_ADDRESS: "YOUR_VERIFIED_SOLANA_MINT_ADDRESS",
-  PUMP_FUN_URL: "YOUR_OFFICIAL_PUMP_FUN_COIN_URL",
-  DEXSCREENER_URL: "YOUR_VERIFIED_DEXSCREENER_PAIR_URL",
-  TELEGRAM_URL: "YOUR_OFFICIAL_TELEGRAM_URL",
-  X_URL: "YOUR_OFFICIAL_X_PROFILE_URL"
-};
-```
-
-Also review the visible token name, ticker, token-supply display, fair-launch wording and disclaimer in the HTML. These are website content, not proof of an on-chain token configuration or completed launch. Update them only after checking the actual token and the project's approved disclosures.
+After a token is legally cleared and actually created, update the visible project-status section in `index.html` only with independently verified details. Add external links only after the official accounts and destinations exist and have been checked.
 
 Do not publish a fabricated contract address, fake social account, unsupported supply claim, guaranteed return, guaranteed graduation claim or unverified liquidity statement.
 
