@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1% BATTERY ($1PCT) — The Future Is Updating. Your Bills Aren't.</title>
-  <meta name="description" content="Welcome to The 1% Club ($1PCT) on Solana. The future is updating. Your bills aren't. Running on 1% battery in survival mode." />
-  <meta property="og:title" content="1% BATTERY ($1PCT) — Solana Memecoin" />
-  <meta property="og:description" content="The future is updating. Your bills aren't. Join The 1% Club." />
+  <title>1% BATTERY ($1PCT) — The 1% Club</title>
+  <meta name="description" content="Not the billionaire 1%. The 1% battery. A little internet corner for people navigating work, money, AI and online life. Make a meme. Take a breath. Keep going." />
+  <meta property="og:title" content="1% BATTERY — The 1% Club" />
+  <meta property="og:description" content="Not the billionaire 1%. The 1% battery. We're all figuring it out." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0B0E14" />
 
@@ -533,6 +533,116 @@
         display: none;
       }
     }
+
+    /* RETRO SYSTEM SKIN — CRT terminal / 90s shareware */
+    :root {
+      --bg: #10150D; --bg-card: #182116; --bg-card-hover: #202D1B;
+      --border: #536B3D; --text: #F0F2D8; --text-muted: #B5BE9D;
+      --red: #FF765E; --red-glow: rgba(255, 118, 94, 0.28);
+      --green: #B7F34A; --green-dim: rgba(183, 243, 74, 0.10);
+      --font-sans: "Courier New", Courier, monospace;
+      --font-mono: "Courier New", Courier, monospace;
+    }
+    html { background: #0A0E08; color: var(--text); font-family: var(--font-sans); }
+    body {
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(rgba(183,243,74,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(183,243,74,.055) 1px, transparent 1px),
+        radial-gradient(ellipse at 50% 10%, rgba(183,243,74,.10), transparent 55%);
+      background-size: 24px 24px, 24px 24px, 100% 100%;
+      font-family: var(--font-sans);
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .16;
+      background: repeating-linear-gradient(to bottom, rgba(0,0,0,.28) 0, rgba(0,0,0,.28) 1px, transparent 2px, transparent 4px);
+    }
+    body::after {
+      content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.38) 100%);
+    }
+    ::selection { background: var(--green); color: #10150D; }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px dashed var(--green); outline-offset: 4px; }
+    .status-bar { background: #1C2818; color: var(--green); border-bottom: 2px solid var(--green); font-size: 11px; letter-spacing: .045em; text-transform: uppercase; }
+    .pulse-dot { background: var(--green); box-shadow: 0 0 0 3px rgba(183,243,74,.12), 0 0 12px var(--green); }
+    header { background: rgba(12,17,10,.96); border-bottom: 2px solid var(--border); backdrop-filter: none; }
+    .nav-inner { min-height: 72px; height: auto; padding-top: 10px; padding-bottom: 10px; }
+    .brand { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .04em; }
+    .batt-pill { border-radius: 0; border-width: 2px; font-weight: 900; box-shadow: 2px 2px 0 #6A2C22; }
+    .nav-links { gap: 16px; font-family: var(--font-mono); text-transform: uppercase; font-size: 11px; }
+    .nav-links a { padding: 7px 4px; }
+    .nav-links .nav-cta { background: var(--green); color: #10150D !important; border: 2px solid var(--green); border-radius: 0; box-shadow: 3px 3px 0 #536B3D; padding: 10px 12px; }
+    .hero { padding-top: 76px; padding-bottom: 68px; gap: 38px; }
+    .badge { border-radius: 0; border: 1px dashed var(--green); background: #192416; color: var(--green); font-weight: 900; }
+    h1, h2, h3 { font-family: var(--font-mono); text-transform: uppercase; }
+    h1 { line-height: 1.12; letter-spacing: -.065em; text-shadow: 3px 3px 0 rgba(183,243,74,.12); }
+    h1 span.accent-red { color: var(--red); text-shadow: 3px 3px 0 rgba(255,118,94,.16); }
+    .hero-sub { font-size: 16px; line-height: 1.8; max-width: 600px; }
+    .hero-actions { gap: 14px; }
+    .btn { border-radius: 0; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .03em; font-size: 12px; border-width: 2px; box-shadow: 4px 4px 0 rgba(0,0,0,.40); }
+    .btn-primary { background: var(--green); color: #10150D; border-color: var(--green); box-shadow: 4px 4px 0 #536B3D; }
+    .btn-primary:hover { background: #D1FF77; color: #10150D; }
+    .btn-secondary { background: #1A2417; color: var(--text); border-color: #718A56; }
+    .btn-secondary:hover { background: #26341F; border-color: var(--green); }
+    .ca-box { border: 2px solid var(--border); border-radius: 0; box-shadow: 5px 5px 0 rgba(0,0,0,.35); background: #11190F; }
+    .ca-value { color: var(--green); font-size: 11px; line-height: 1.6; }
+    .status-note { align-items: center; }
+    .status-stamp { flex-shrink: 0; padding: 7px 9px; color: var(--red); border: 2px solid var(--red); font: 900 11px var(--font-mono); transform: rotate(-3deg); white-space: nowrap; }
+    .mascot-card { border: 2px solid var(--border); border-radius: 0; box-shadow: 8px 8px 0 rgba(0,0,0,.42); }
+    .mascot-header, .mascot-footer { text-transform: uppercase; letter-spacing: .035em; }
+    .mascot-frame { border-radius: 0; border: 2px dashed #536B3D; background-color: #0A0E08; background-image: radial-gradient(rgba(183,243,74,.24) 1px, transparent 1px); background-size: 8px 8px; }
+    section { border-top: 2px dashed var(--border); padding: 66px 0; }
+    .section-tag { color: var(--green); font-weight: 900; }
+    h2 { letter-spacing: -.05em; line-height: 1.18; }
+    .section-desc { font-size: 14px; line-height: 1.85; }
+    .card { border-radius: 0; border: 2px solid var(--border); box-shadow: 4px 4px 0 #080B07; background: #172015; }
+    .card:hover { border-color: var(--green); transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #080B07; }
+    .card-code { color: var(--green); }
+    .card h3 { font-size: 16px; line-height: 1.35; }
+    .card p { line-height: 1.75; }
+    .community-note { margin-top: 24px; padding: 18px 20px; border: 2px dashed var(--green); background: rgba(183,243,74,.07); color: var(--text-muted); font-size: 13px; line-height: 1.8; }
+    .community-note strong { color: var(--green); }
+    .canvas-wrap { border-radius: 0; border: 2px solid var(--border); box-shadow: 6px 6px 0 #080B07; background: #0B1009; }
+    canvas { border-radius: 0; border: 2px solid #536B3D; image-rendering: pixelated; }
+    .studio-controls { gap: 18px; }
+    .input-group label { color: var(--green); font-weight: 900; letter-spacing: .05em; }
+    .input-group input, .input-group select { border-radius: 0; border: 2px solid var(--border); background: #0D130B; color: var(--text); font-family: var(--font-mono); }
+    .input-group input:focus, .input-group select:focus { border-color: var(--green); }
+    .spec-item { border-radius: 0; border: 2px solid var(--border); box-shadow: 3px 3px 0 #080B07; background: #172015; }
+    .spec-item strong { font-family: var(--font-mono); font-size: 16px; overflow-wrap: anywhere; }
+    .status-footnote { margin-top: 20px; color: var(--text-muted); font-size: 12px; line-height: 1.8; }
+    footer { padding-top: 48px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; font: 11px var(--font-mono); text-transform: uppercase; }
+    .footer-links a:hover { color: var(--green); }
+    .disclaimer { border-radius: 0; border: 1px dashed var(--border); background: rgba(0,0,0,.18); line-height: 1.8; }
+    @media (max-width: 860px) {
+      .nav-inner { align-items: flex-start; gap: 12px; }
+      .nav-links { justify-content: flex-end; flex-wrap: wrap; gap: 8px 12px; }
+      .nav-links a:not(.nav-cta) { display: inline-block; }
+      .hero { padding-top: 44px; }
+      .status-note { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 560px) {
+      .container { padding-left: 15px; padding-right: 15px; }
+      .nav-inner { flex-direction: column; align-items: stretch; }
+      .nav-links { justify-content: flex-start; }
+      .nav-links .nav-cta { margin-left: auto; }
+      .hero { padding-top: 34px; }
+      .hero-sub { font-size: 14px; }
+      .hero-actions .btn { width: 100%; }
+      .specs-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .spec-item { padding: 14px; }
+      .spec-item strong { font-size: 13px; }
+      .footer-top { align-items: flex-start; flex-direction: column; }
+      .footer-links { gap: 12px; }
+      .status-bar { font-size: 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      body::before { display: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -540,7 +650,7 @@
   <!-- Top System Warning Banner -->
   <div class="status-bar">
     <span class="pulse-dot"></span>
-    <span>SYSTEM ALERT: BATTERY AT 1% — PLUG IN CHARGER OR KEEP SCROLLING ($1PCT ON SOLANA)</span>
+    <span>BOOT STATUS: BATTERY AT 1% // HUMAN MODE: ON // STILL LOADING...</span>
   </div>
 
   <!-- Navigation -->
@@ -551,12 +661,11 @@
         <span class="batt-pill">1%</span>
       </a>
       <nav class="nav-links">
-        <a href="#errors">System Errors</a>
-        <a href="#meme-maker">Meme Maker</a>
-        <a href="#token">Token Specs</a>
-        <a id="nav-tg" href="https://t.me/YOUR_TELEGRAM_GROUP" target="_blank" rel="noopener">Telegram</a>
-        <a id="nav-x" href="https://x.com/YOUR_X_HANDLE" target="_blank" rel="noopener">X / Twitter</a>
-        <a id="nav-buy" href="https://pump.fun" target="_blank" rel="noopener" class="nav-cta">Buy $1PCT</a>
+        <a href="#errors">Daily Errors</a>
+        <a href="#club">The 1% Club</a>
+        <a href="#meme-maker">Meme Lab</a>
+        <a href="#token">Project Status</a>
+        <a href="#meme-maker" class="nav-cta">Make a meme ↗</a>
       </nav>
     </div>
   </header>
@@ -565,41 +674,32 @@
     <!-- Hero Section -->
     <section class="hero" style="border-top: none;">
       <div>
-        <div class="badge">SOLANA FAIR LAUNCH • PUMP.FUN</div>
-        <h1>The future is updating. <span class="accent-red">Your bills aren't.</span></h1>
+        <div class="badge">A LITTLE INTERNET CORNER FOR THE RUNNING-ON-EMPTY</div>
+        <h1>Not the billionaire 1%. <span class="accent-red">The 1% battery.</span></h1>
         <p class="hero-sub">
-          Not the billionaire 1%. The <strong>1% battery</strong>. Welcome to <strong>The 1% Club ($1PCT)</strong>—the internet culture coin for everyone surviving AI job whiplash, rent hikes, and scam links on low power.
+          Rent is due. The job listing wants five years of experience. AI just updated again. Your phone is at 1%.
+          Welcome to <strong>The 1% Club</strong> — for people figuring it out one day, one small win and one questionable coffee at a time.
         </p>
 
         <div class="hero-actions">
-          <a id="hero-buy" href="https://pump.fun" target="_blank" rel="noopener" class="btn btn-primary">
-            Buy on Pump.fun
-          </a>
-          <a id="hero-dex" href="https://dexscreener.com/solana" target="_blank" rel="noopener" class="btn btn-secondary">
-            Live Chart
-          </a>
-          <a id="hero-tg" href="https://t.me/YOUR_TELEGRAM_GROUP" target="_blank" rel="noopener" class="btn btn-secondary">
-            Join Telegram
-          </a>
-          <a id="hero-x" href="https://x.com/YOUR_X_HANDLE" target="_blank" rel="noopener" class="btn btn-secondary">
-            Follow on X
-          </a>
+          <a href="#meme-maker" class="btn btn-primary">MAKE YOUR OWN MEME ↗</a>
+          <a href="#club" class="btn btn-secondary">WHAT WE'RE ABOUT ↓</a>
         </div>
 
-        <div class="ca-box">
+        <div class="ca-box status-note">
           <div>
-            <span class="ca-label">Solana Contract Address (CA)</span>
-            <span id="ca-text" class="ca-value">LAUNCHING SOON — CHECK TELEGRAM FOR LIVE CA</span>
+            <span class="ca-label">PROJECT STATUS // TOKEN INFORMATION</span>
+            <span class="ca-value">PRE-LAUNCH — NO VERIFIED CONTRACT ADDRESS PUBLISHED</span>
           </div>
-          <button id="copy-ca-btn" class="copy-btn" type="button">COPY CA</button>
+          <span class="status-stamp">NOT LIVE</span>
         </div>
       </div>
 
       <!-- Mascot Card (Custom Vector BATT Character) -->
       <div class="mascot-card">
         <div class="mascot-header">
-          <span>UNIT: BATT-01</span>
-          <span style="color: var(--red); font-weight: 700;">[POWER: 1% CRITICAL]</span>
+          <span>PLAYER_01: YOU</span>
+          <span style="color: var(--red); font-weight: 700;">[ENERGY: 1%]</span>
         </div>
         <div class="mascot-frame">
           <!-- Replace this SVG with <img src="batt-avatar.png" alt="BATT 1% Mascot" style="width:100%;border-radius:10px;"> once you upload your artwork -->
@@ -656,8 +756,8 @@
           </svg>
         </div>
         <div class="mascot-footer">
-          <span>STATUS: OVERWORKED</span>
-          <span>UPGRADE: DENIED (NO FUNDS)</span>
+          <span>STATUS: DOING YOUR BEST</span>
+          <span>QUEST: MAKE IT THROUGH TODAY</span>
         </div>
       </div>
     </section>
@@ -667,40 +767,69 @@
       <div class="section-tag">// DAILY DIAGNOSTICS</div>
       <h2>Three things draining your last 1%.</h2>
       <p class="section-desc">
-        Every generation gets a defining internet meme. Ours is watching AI rewrite the entire economy while rent still costs 70% of your paycheck.
-      </p>
+          Different lives, different pressures. These are three conversations many of us are having — without pretending one meme can explain everyone's experience.
+        </p>
 
       <div class="grid-3">
         <div class="card">
           <span class="card-code">ERR_01 // ECON.EXE</span>
           <h3>Salary Hit. Rent Claimed It.</h3>
           <p>
-            Payday lasts approximately 4 minutes before rent, groceries, and 6 forgotten subscriptions clean out the account.
+            Payday arrives. Rent, groceries, transport and subscriptions already know the date. The maths can feel relentless.
           </p>
         </div>
         <div class="card">
           <span class="card-code">ERR_02 // AI.EXE</span>
           <h3>Updating Every Monday.</h3>
           <p>
-            Entry-level jobs now require 5 years of experience in an AI framework released last Thursday afternoon.
+            Trying to build a career while tools, expectations and job descriptions keep changing. Is there an update for humans?
           </p>
         </div>
         <div class="card">
           <span class="card-code">ERR_03 // CYBER.EXE</span>
           <h3>Scammers Everywhere.</h3>
           <p>
-            Fake recruiters, phishing links, deepfakes, and wallet drainers working overtime to steal your remaining €14.20.
+            Fake recruiters, phishing links and deepfakes are everywhere. Pause, check the source and ask for a second opinion. No shame in being careful.
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- The 1% Club -->
+    <section id="club" class="club-section">
+      <div class="section-tag">// YOU ARE NOT THE ONLY ONE</div>
+      <h2>Some days, just showing up is the win.</h2>
+      <p class="section-desc">
+        No perfect morning routine. No five-year plan required. Just a place to laugh at the glitches, swap things we've learned and give each other a little room to figure it out.
+      </p>
+      <div class="grid-3 club-grid">
+        <div class="card">
+          <span class="card-code">01 // EXHALE</span>
+          <h3>Laugh at the chaos.</h3>
+          <p>Turn the weird, frustrating and very human moments into memes. Sometimes a laugh is a decent restart.</p>
+        </div>
+        <div class="card">
+          <span class="card-code">02 // SHARE</span>
+          <h3>Pass on what helps.</h3>
+          <p>A useful AI workflow, a scam warning or a money-saving tip. Small bits of knowledge can make someone's day easier.</p>
+        </div>
+        <div class="card">
+          <span class="card-code">03 // KEEP GOING</span>
+          <h3>Count the small wins.</h3>
+          <p>Finished the application? Took a break? Asked for help? That counts. Progress does not need to look impressive.</p>
+        </div>
+      </div>
+      <div class="community-note">
+        <strong>THE 1% CLUB RULE:</strong> You don't need to connect a wallet or buy anything to enjoy the memes. This page is a starting point — make something, save it and share it with someone who gets it.
       </div>
     </section>
 
     <!-- Interactive Community Meme Generator -->
     <section id="meme-maker">
       <div class="section-tag">// UGC REMIX ENGINE</div>
-      <h2>Make a $1PCT Meme in 5 Seconds.</h2>
+      <h2>Your day is a meme. Make it official.</h2>
       <p class="section-desc">
-        Pick a preset or type your own daily L, download the PNG, and reply on X or Telegram.
+        Pick a preset or write your own daily system error. Download the image and share it wherever your friends hang out.
       </p>
 
       <div class="studio-grid">
@@ -737,32 +866,33 @@
       </div>
     </section>
 
-    <!-- Token Transparency Specs -->
+    <!-- Project Status -->
     <section id="token">
-      <div class="section-tag">// FAIR LAUNCH ARCHITECTURE</div>
-      <h2>Zero Presale. Zero Insider Games.</h2>
+      <div class="section-tag">// PROJECT STATUS</div>
+      <h2>Still loading. No fake green lights.</h2>
       <p class="section-desc">
-        Deployed transparently on Solana via Pump.fun. When the bonding curve completes, liquidity migrates automatically to PumpSwap with burned LP.
+        We're building the identity and the community first. Token information below is provisional until a real on-chain launch can be independently verified.
       </p>
 
       <div class="specs-grid">
         <div class="spec-item">
-          <span>Ticker</span>
-          <strong>$1PCT</strong>
+          <span>Brand</span>
+          <strong>1% BATTERY</strong>
+        </div>
+        <div class="spec-item">
+          <span>Symbol</span>
+          <strong>$1PCT*</strong>
         </div>
         <div class="spec-item">
           <span>Network</span>
-          <strong>Solana</strong>
+          <strong>Solana (planned)</strong>
         </div>
         <div class="spec-item">
-          <span>Total Supply</span>
-          <strong>1,000,000,000</strong>
-        </div>
-        <div class="spec-item">
-          <span>Launch Type</span>
-          <strong>100% Fair Launch</strong>
+          <span>Token status</span>
+          <strong>Pre-launch</strong>
         </div>
       </div>
+      <p class="status-footnote">*Project-selected symbol, not a verified mint address. No supply, liquidity, market or launch claim is made on this page. Always verify a contract address independently before interacting with any token.</p>
     </section>
   </main>
 
@@ -773,65 +903,23 @@
           <span>1% BATTERY ($1PCT)</span>
           <span class="batt-pill">1%</span>
         </div>
-        <div style="display: flex; gap: 20px;">
-          <a id="foot-pump" href="https://pump.fun" target="_blank" rel="noopener">Pump.fun</a>
-          <a id="foot-dex" href="https://dexscreener.com/solana" target="_blank" rel="noopener">DexScreener</a>
-          <a id="foot-tg" href="https://t.me/YOUR_TELEGRAM_GROUP" target="_blank" rel="noopener">Telegram</a>
-          <a id="foot-x" href="https://x.com/YOUR_X_HANDLE" target="_blank" rel="noopener">X (Twitter)</a>
+        <div class="footer-links">
+          <a href="#errors">Daily errors</a>
+          <a href="#club">The 1% Club</a>
+          <a href="#meme-maker">Meme lab</a>
+          <a href="#token">Project status</a>
+          <a href="#">Back to top ↑</a>
         </div>
       </div>
 
       <div class="disclaimer">
-        <strong>DISCLAIMER:</strong> $1PCT (1% BATTERY) is a community-driven memecoin created strictly for entertainment, satire, and internet culture. $1PCT has no intrinsic value, no formal roadmap obligation, and no expectation of financial return. Cryptocurrency trading carries extreme volatility and risk of total loss. Always verify the official Solana Contract Address before interacting with any liquidity pool.
+        <strong>PLEASE READ:</strong> 1% BATTERY is an internet-culture project and this page is a pre-launch concept site. The proposed $1PCT symbol is not a verified contract address, and no token supply, market, liquidity or launch status is represented here as live. If a token is launched, it will be highly speculative and may lose all value. Nothing on this site is investment advice or a promise of returns, utility or liquidity. Never share a wallet seed phrase or private key, and independently verify any future contract address.
       </div>
     </div>
   </footer>
 
   <script>
-    // =========================================================================
-    // 1. UPDATE THESE 4 VALUES ONCE YOUR TOKEN & SOCIALS ARE CREATED
-    // =========================================================================
-    const CONFIG = {
-      CONTRACT_ADDRESS: "LAUNCHING SOON — CHECK TELEGRAM FOR LIVE CA", // Paste Solana CA here when minted
-      PUMP_FUN_URL: "https://pump.fun", // Replace with https://pump.fun/coin/YOUR_CA
-      DEXSCREENER_URL: "https://dexscreener.com/solana", // Replace with https://dexscreener.com/solana/YOUR_CA
-      TELEGRAM_URL: "https://t.me/YOUR_TELEGRAM_GROUP",
-      X_URL: "https://x.com/YOUR_X_HANDLE"
-    };
-
-    // Bind Config Links
-    document.getElementById("ca-text").textContent = CONFIG.CONTRACT_ADDRESS;
-    ["nav-buy", "hero-buy", "foot-pump"].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.href = CONFIG.PUMP_FUN_URL;
-    });
-    ["hero-dex", "foot-dex"].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.href = CONFIG.DEXSCREENER_URL;
-    });
-    ["nav-tg", "hero-tg", "foot-tg"].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.href = CONFIG.TELEGRAM_URL;
-    });
-    ["nav-x", "hero-x", "foot-x"].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.href = CONFIG.X_URL;
-    });
-
-    // Copy CA Handler
-    const copyBtn = document.getElementById("copy-ca-btn");
-    copyBtn.addEventListener("click", () => {
-      navigator.clipboard.writeText(CONFIG.CONTRACT_ADDRESS).then(() => {
-        copyBtn.textContent = "COPIED!";
-        copyBtn.style.borderColor = "#39FF14";
-        copyBtn.style.color = "#39FF14";
-        setTimeout(() => {
-          copyBtn.textContent = "COPY CA";
-          copyBtn.style.borderColor = "";
-          copyBtn.style.color = "";
-        }, 1800);
-      });
-    });
+    // External social, chart and token links are intentionally omitted until verified.
 
     // =========================================================================
     // 2. BUILT-IN CANVAS MEME GENERATOR (ZERO EXTERNAL ASSETS NEEDED)
@@ -871,11 +959,11 @@
 
     function renderMeme() {
       // Dark background
-      ctx.fillStyle = "#0B0E14";
+      ctx.fillStyle = "#10150D";
       ctx.fillRect(0, 0, 600, 600);
 
       // Subtle Grid
-      ctx.strokeStyle = "rgba(255,255,255,0.04)";
+      ctx.strokeStyle = "rgba(183,243,74,0.10)";
       ctx.lineWidth = 1;
       for (let i = 0; i < 600; i += 30) {
         ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 600); ctx.stroke();
@@ -912,10 +1000,10 @@
       ctx.restore();
 
       // Status Pill
-      ctx.fillStyle = "#94A3B8";
+      ctx.fillStyle = "#B7F34A";
       ctx.font = "700 16px monospace";
       ctx.textAlign = "center";
-      ctx.fillText("SURVIVAL MODE: ON  |  $1PCT", 300, 335);
+      ctx.fillText("SURVIVAL MODE: ON  |  THE 1% CLUB", 300, 335);
 
       // Meme Top & Bottom Text
       ctx.font = "900 32px Impact, Arial Black, sans-serif";
@@ -926,7 +1014,7 @@
       // Watermark
       ctx.fillStyle = "#39FF14";
       ctx.font = "700 14px monospace";
-      ctx.fillText("$1PCT • THE 1% CLUB", 300, 578);
+      ctx.fillText("1% BATTERY • THE 1% CLUB", 300, 578);
     }
 
     presetSelect.addEventListener("change", () => {
